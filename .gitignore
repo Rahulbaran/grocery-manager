@@ -8,5 +8,5 @@ database
 
 
 # Javascript related
-npm_modules
+node_modules
 package-lock.json
