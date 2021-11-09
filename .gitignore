@@ -1,0 +1,12 @@
+# Flask related
+venv/
+virtual/
+.env
+database
+
+
+
+
+# Javascript related
+npm_modules
+package-lock.json
