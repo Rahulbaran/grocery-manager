@@ -1,0 +1,123 @@
+//registration page styling
+.registration {
+    &--main {
+        display:grid;
+        grid-template-columns:1fr;
+        grid-gap:40px;
+        justify-items:flex-start;
+        align-items:center;
+        padding:3rem .8rem;
+        background-color:rgb(255, 252, 246);
+    }
+
+    &__svg__container {
+        display:none;
+        
+        img {
+            height:32rem;
+            display:block;
+            min-width:100%;
+        }
+    }
+
+    &__form {
+        width:100%;
+        margin:0 auto;
+        padding:1.5rem 1rem;
+        border-radius:3px;
+        box-shadow:0 0 2px rgba(0,0,0,.3);
+        background-color:Var(--color-white);
+        display:grid;
+        grid-template-columns:1fr;
+        grid-gap:.3rem;
+        font-family:var(--tertiary-font);
+        color:var(--input-label-color);
+
+        legend {
+            line-height:1rem;
+            font-size:1.3rem;
+            font-weight:600;
+            color:var(--legend-color);
+            margin-bottom:.75rem;
+            text-decoration:2px underline currentColor;
+            text-underline-offset:2px;
+        }
+    }
+}
+
+.form {
+    &__group {
+        display:flex;
+        justify-content:center;
+        align-items:flex-start;
+        flex-direction:column;
+        
+        label {
+            font-size:.9rem;
+            font-weight:500;
+            line-height:1.2rem;
+        }
+        input {
+            font-family:var(--primary-font);
+            font-size:.95rem;
+            width:100%;
+            padding:.45rem .5rem;
+            border:1px solid var(--input-field-border);
+            border-radius:2px;
+            outline:none;
+            border-radius:3px;
+
+            &:focus {
+                outline:1px solid var(--color-black);
+            }
+        }
+    }
+    &__recaptcha__group {
+        margin-top:.5rem;
+        margin-bottom:.5rem;
+    }
+    &__submit__group {
+        input {
+            padding:.75rem 1.25rem;
+        }
+    }
+}
+
+
+
+
+
+
+//media queries
+@media screen and (min-width:481px){    
+    .registration {
+        &__form {
+            width:90%;
+            padding:1.5rem;
+        }
+    }
+}
+@media screen and (min-width:760px) {
+    .registration {
+        &__form {
+            width:80%;
+        }
+        
+        &--main {
+            padding:3rem;
+        }
+    }
+}
+@media screen and (min-width:992px) {
+    .registration {
+        &--main {
+            grid-template-columns:repeat(2,1fr);
+        }
+        &__form {
+            width:100%;
+        }
+        &__svg__container {
+            display:block;
+        }
+    }
+}

@@ -34,7 +34,7 @@ const jsTask = function () {
 
 //watch task
 const watchTask = function () {
-    watch('static/scss/*.scss', scssTask);
+    watch('static/scss/*.scss',{delay : 1000}, scssTask);
     watch('static/js/*.js', jsTask);  
 };
 

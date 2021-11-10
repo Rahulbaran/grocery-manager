@@ -15,7 +15,7 @@
     <!--------------------------- Google fonts -------------------------->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&family=Noto+Sans&family=Rubik:wght@300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&family=Noto+Sans&family=Rubik:wght@300;400;500&display=swap" rel="stylesheet">
 
     <!---------------------- fontawesome icons stylesheet --------------------->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" integrity="sha512-BnbUDfEUfV0Slx6TunuB042k9tuKe3xrD6q4mg5Ed72LTgzDIcLPxg6yI2gcMFRyomt+yJJxE+zJwNmxki6/RA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -28,6 +28,11 @@
     {% block stylesheet %}
     {% endblock %}
 
+
+    <!------------------ Custom scripts ----------------->
+    <script src="{{url_for('static',filename='minjs/layout.js')}}" defer async></script>
+
+
 </head>
 <body>
     
@@ -37,12 +42,29 @@
         <!------------------- Navigation bar ---------------------->
         <nav class="navigation__bar">
             <a href="{{url_for('home')}}" class="navigation__link {{'navigation__link__active' if active_page=='home' else ''}}" title="Home">Home</a>
-            <a href="" class="navigation__link {{'navigation__link__active' if active_page=='login' else ''}}" title="Login">Login</a>
-            <a href="" class="navigation__link {{'navigation__link__active' if active_page=='register' else ''}}" title="Register">Register</a>
+            <a href="{{url_for('login')}}" class="navigation__link {{'navigation__link__active' if active_page=='login' else ''}}" title="Login">Login</a>
+            <a href="{{url_for('register')}}" class="navigation__link {{'navigation__link__active' if active_page=='register' else ''}}" title="Register">Register</a>
             <a href="{{url_for('contactUs')}}" class="navigation__link {{'navigation__link__active' if active_page=='contactUs' else ''}}" title="Contact Us">Contact Us</a>
         </nav>
 
     </header>
+
+
+    <!----------- Container to flash messages when available ----------->
+    {% with messages=get_flashed_messages(with_categories=True) %}
+    {% if messages %}
+    <div class="msg--wrapper">
+        {% for cat,msg in messages %}
+            <div class="msg__container {{cat}}__msg__container">
+                <span>{{msg}}</span>
+                <button class="msg__hide__btn">
+                    &Cross;
+                </button>
+            </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    {% endwith %}
 
 
     <!------------------- Jinja block for body ------------------>
