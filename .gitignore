@@ -3,6 +3,7 @@ venv/
 virtual/
 .env
 database
+__pycache__
 
 
 

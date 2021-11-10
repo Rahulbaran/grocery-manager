@@ -1,14 +1,101 @@
 html{
     font-size:1rem;
     box-sizing:border-box;
-    height:100%;
 }
-*,*::after,*::before {
+
+*,
+*::after,
+*::before {
     margin:0;
     padding:0;
     box-sizing:inherit;
 }
 
+:root {
+    --primary-font:'Noto sans',sans-serif;
+    --secondary-font:'Rubik',sans-serif;
+    --tertiary-font:'Montserrat',sans-serif;
+    --color-white:#fff;
+    --header-grad-1:hsl(250,100%,40%);
+    --header-grad-2:hsl(265,90%,40%);
+    --header-grad-3:hsl(270,100%,50%);
+    --nav-link-color:rgb(255, 253, 201);
+    --h1-color:rgb(61, 64, 77);
+    --btn-color-1:hsl(260, 100%, 50%);
+    --btn-color-2:hsl(255,90%,50%);
+}
+
+
 body {
-font-size:1rem
+    font:400 100%/160% var(--primary-font);
+    position:relative;
+}
+
+
+//header
+.application--header {
+    background:linear-gradient(to top left, var(--header-grad-1) var(--x,0%), var(--header-grad-2),var(--header-grad-3));
+    background-size:200% 200%;
+    padding:.5rem 1rem;
+    animation: header-animate 8000ms ease-in-out infinite;
+}
+
+@keyframes header-animate {
+    0% { background-position:0% 50%; }
+    50% { background-position:50% 100%; }
+    100% { background-position:0% 50%; }
+}
+
+
+.navigation {
+    &__bar {
+        display:flex;
+        justify-content:flex-end;
+        align-items:center;
+    }
+    &__link {
+        display:inline-block;
+        padding:.25rem;
+        text-decoration:none;
+        color:var(--nav-link-color);
+        font-size:1.05rem;
+
+        &:hover,
+        &:focus {
+            text-decoration:underline 1px currentColor;
+            text-underline-offset: 3px;
+        }
+        
+    }
+    &__link:not(.navigation__link:last-child){
+        margin-right:.6rem;
+    }
+
+    &__link__active {
+        text-decoration:underline 1px currentColor;
+        text-underline-offset: 3px;
+    }
+}
+
+
+
+
+
+//media queries
+@media screen and (max-width:480px) {
+    html {
+        font-size:.95rem;
+    }
+}
+
+@media screen and (max-width:760px) {
+    html {
+        font-size:1rem;
+    }
+}
+
+@media screen and (min-width:761px) {
+    html {
+        font-size:1.1rem;
+    }
 }

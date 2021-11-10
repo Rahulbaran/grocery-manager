@@ -1,0 +1,28 @@
+{% extends 'layout.html' %}
+{% set active_page='home' %}
+
+{% block stylesheet %}
+<link rel="stylesheet" href="{{url_for('static',filename='css/home.css')}}">
+{% endblock %}
+
+{% block body %}
+    <main class="home--logged--out--main">
+
+        <div class="home__content__container">
+            <h1>Grocery Manager</h1>
+            <p>Make your grocery business painless</p>
+            <a href="#" class="get__started__link">
+                <span>Start now</span>
+                <i class="fas fa-arrow-circle-right"></i>
+            </a>
+        </div>
+
+        <div class="home__svg__container">
+            <img src="{{url_for('static', filename='site-images/home-svg.svg')}}" alt="Homepage SVG">
+        </div>
+
+    </main>
+{% endblock %}
+
+{% block script %}
+{% endblock %}

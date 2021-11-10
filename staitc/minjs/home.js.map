@@ -1,1 +1,0 @@
-{"version":3,"sources":["home.js"],"names":["fun","console","log"],"mappings":"AAAA,MAAMA,GAAG,GAAC,MAAI;AAACC,EAAAA,OAAO,CAACC,GAAR,CAAY,MAAZ;AAAoB,CAAnC;;AAAoCD,OAAO,CAACC,GAAR,CAAY,MAAZ","sourcesContent":["const fun=()=>{console.log(\"Name\")};console.log(\"Name\");"],"file":"home.js"}
