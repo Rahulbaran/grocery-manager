@@ -1,0 +1,211 @@
+//scss related syntaxes
+@mixin flex($just,$align,$dir:row) {
+    display:flex;
+    justify-content:$just;
+    align-items:$align;
+    flex-direction:$dir;
+}
+$medium-wt:500;
+
+
+
+html{
+    font-size:1rem;
+    box-sizing:border-box;
+}
+
+*,
+*::after,
+*::before {
+    margin:0;
+    padding:0;
+    box-sizing:inherit;
+}
+
+
+:root {
+    --primary-font:'Noto sans',sans-serif;
+    --secondary-font:'Rubik',sans-serif;
+    --tertiary-font:'Montserrat',sans-serif;
+    --color-white:#fff;
+    --color-black : #000;
+    --header-grad-1:hsl(260,100%,40%);
+    --header-grad-2:hsl(265,90%,40%);
+    --header-grad-3:hsl(270,100%,50%);
+    --nav-link-color:rgb(255, 253, 201);
+    --h1-color:rgb(61, 64, 77);
+    --btn-color:hsl(260, 100%, 50%);
+    --legend-color: rgb(73, 75, 84);
+    --input-label-color:rgb(82, 80, 94);
+    --input-field-border:#bbb;
+    --form-link-color:hsl(260, 100%, 50%);
+    --shadow-color:rgba(0,0,0,.4);
+    --info-msg-bg:hsl(250, 100%, 85%);
+    --info-msg-color:hsl(255,90%,50%);
+    --error-msg-bg:hsl(4, 100%, 87%);
+    --error-msg-color:hsl(5, 100%, 50%);
+}
+
+
+body {
+    font:400 100%/160% var(--primary-font);
+    position:relative;
+}
+
+
+
+//general 
+.btn {
+    font-family:var(--font-tertiary);
+    font-size:.9rem;
+    text-transform:uppercase;
+    background-color:var(--btn-color);
+    border:none;
+    border-radius:4px;
+    font-weight:$medium-wt;
+    color:var(--color-white);
+    letter-spacing:.5px;
+    box-shadow:2px 2px 3px rgba(0,0,0,.2),2px 2px 2px var(--shadow-color);
+    transition:transform .2s cubic-bezier(0.18, 0.89, 0.32, 1.28),      box-shadow .2s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+
+    &:hover,
+    &:focus {
+        cursor:pointer;
+        transform:translateY(-3px);
+        box-shadow:4px 4px 5px rgba(0,0,0,.6);
+    }
+
+    &:active {
+        transform:translateY(-1px);
+        box-shadow:3px 3px 5px var(--shadow-color);
+    }
+}
+
+
+
+
+//header
+.application--header {
+    background:linear-gradient(to top left, var(--header-grad-1) var(--x,0%), var(--header-grad-2),var(--header-grad-3));
+    background-size:200% 200%;
+    padding:.5rem 1rem;
+    animation: header-animate 8000ms ease-in-out infinite;
+}
+
+@keyframes header-animate {
+    0% { background-position:0% 50%; }
+    50% { background-position:50% 100%; }
+    100% { background-position:0% 50%; }
+}
+
+
+.navigation {
+    &__bar {
+        @include flex(flex-end,center);
+    }
+    &__link {
+        display:inline-block;
+        padding:.25rem;
+        text-decoration:none;
+        color:var(--nav-link-color);
+        font-size:1.05rem;
+
+        &:hover,
+        &:focus {
+            text-decoration:underline 1px currentColor;
+            text-underline-offset: 3px;
+        }
+        
+    }
+    &__link:not(.navigation__link:last-child){
+        margin-right:.6rem;
+    }
+
+    &__link__active {
+        text-decoration:underline 1px currentColor;
+        text-underline-offset: 3px;
+    }
+}
+
+
+
+
+
+//input fields error messages styling
+.error__field {
+    border-color:rgb(228, 25, 25) !important;
+}
+.field__error__msg {
+    font-size:.7rem;
+    color:rgb(228, 25, 25);
+    letter-spacing:.5px;
+    font-weight:$medium-wt;
+}
+
+
+
+
+
+//styling for message flashing container
+@mixin msgContainer ($bg,$color) {
+    background-color:$bg;
+    span { color:$color; }
+    
+    button { 
+        background-color:transparent;
+        font-size:1.35rem;
+        border:none;
+        color:$color;
+    }
+}
+
+.msg__container {
+    width:100%;
+    padding:.5rem 1rem;
+    @include flex(center,center);
+    font-family:var(--secondary-font);
+
+    span {
+        font-weight:$medium-wt;
+    }
+    button {
+        margin-left:1rem;
+        font-weight:$medium-wt;
+
+        &:hover,
+        &:focus {
+            font-weight:600;
+            cursor:pointer;
+        }
+    }
+}
+
+.info__msg__container {
+    @include msgContainer(var(--info-msg-bg),var(--info-msg-color));
+}
+.error__msg__container {
+    @include msgContainer(var(--error-msg-bg),var(--error-msg-color));
+}
+
+
+
+
+
+//media queries
+@media screen and (max-width:480px) {
+    html {
+        font-size:.95rem;
+    }
+}
+
+@media screen and (max-width:760px) {
+    html {
+        font-size:1rem;
+    }
+}
+
+@media screen and (min-width:761px) {
+    html {
+        font-size:1.1rem;
+    }
+}

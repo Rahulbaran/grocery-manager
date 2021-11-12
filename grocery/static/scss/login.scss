@@ -1,0 +1,199 @@
+//login page styling
+.login {
+    &--main {
+        display:grid;
+        grid-template-columns:1fr;
+        grid-gap:40px;
+        justify-items:flex-start;
+        align-items:center;
+        padding:3rem .8rem;
+        background-color:rgb(255, 252, 246);
+    }
+
+    &__svg__container {
+        display:none;
+        
+        img {
+            height:28rem;
+            display:block;
+            min-width:100%;
+        }
+    }
+
+    &__forms__wrapper {
+        display:flex;
+        justify-content:flex-start;
+        align-items:flex-start;
+        flex-direction:column;
+        padding:1.5rem 1rem;
+        background-color:var(--color-white);
+        border-radius:4px;
+        box-shadow:0 0 3px rgba(0,0,0,.3);
+        width:100%;
+        margin:0 auto;
+        font-family:var(--primary-font);
+
+        h3 {
+            line-height:1rem;
+            font-size:1.3rem;
+            font-weight:600;
+            font-family:var(--tertiary-font);
+            color:var(--legend-color);
+            margin-bottom:1.5rem;
+            text-decoration:2px underline currentColor;
+            text-underline-offset:2px;
+        }
+    }
+
+    &__form__toggle__tabs__container {
+        display:grid;
+        grid-template-columns:repeat(2,1fr);
+        width:100%;
+
+        button {
+            font-family:var(--tertiary-font);
+            font-size:.95rem;
+            width:100%;
+            padding:.5rem;
+            font-weight:500;
+            background-color:transparent;
+            border:none;
+            border-bottom:2px solid hsl(260,100%,90%);
+            color:var(--btn-color);
+            
+            &:hover,
+            &:focus {
+                border-color:currentColor;
+                cursor:pointer;
+            }
+        }
+    }
+
+    &__active__tab {
+        border-color: currentColor !important;
+    }
+
+    &__forms {
+        width:100%;
+    }
+
+    &__form {
+        display:grid;
+        grid-template-columns:1fr;
+        grid-gap:15px;
+        margin-top:.75rem;
+        color:var(--input-label-color);
+    }
+}
+
+//class to hide form
+.form__hidden {
+    display :none;
+}
+
+
+.form {
+    &__group {
+        display:flex;
+        justify-content:center;
+        align-items:flex-start;
+        flex-direction:column;
+        
+        label {
+            font-size:.95rem;
+            font-weight:600;
+            line-height:1.2rem;
+            
+        }
+        input {
+            font-family:var(--primary-font);
+            font-size:.95rem;
+            width:100%;
+            padding:.45rem .5rem;
+            border:1px solid var(--input-field-border);
+            border-radius:2px;
+            outline:none;
+            border-radius:3px;
+
+            &:focus {
+                outline:1px solid var(--color-black);
+            }
+        }
+    }
+    
+    &__remember__group {
+        label {
+            font-size:.95rem;
+            font-weight:600;
+            line-height:1.2rem;
+            margin-left:.5rem;
+        }
+    }
+
+    &__submit__group {
+        input {
+            padding:.75rem 1.5rem;
+        }
+    }
+}
+
+//password forgot link and register now link
+.forgot__password__link,
+.register__now__link {
+    text-decoration:none;
+    color:var(--form-link-color);
+    display:inline-block;
+    font-size:.9rem;
+    font-family:var(--tertiary-font);
+
+    &:hover,
+    &:focus {
+        text-decoration:1px underline currentColor;
+        text-underline-offset:2px;
+    }
+}
+.forgot__password__link {
+    margin-top:.25rem;
+    font-weight:500;
+}
+.registration__page__link__container {
+    font-weight:500;
+    font-size:.9rem;
+}
+
+
+
+
+
+
+//media queries
+@media screen and (min-width:481px){    
+    .login__forms__wrapper {
+        width:90%;
+        padding:1.5rem;
+    }
+}
+@media screen and (min-width:760px) {
+    .login {
+        &--main {
+            padding:3rem;
+        }
+
+        &__forms__wrapper {
+            width:80%;
+        }
+    }
+}
+@media screen and (min-width:992px) {
+    .login {
+        &--main {
+            grid-template-columns:repeat(2,1fr);
+        }
+        &__forms__wrapper {
+            width:100%;
+        }
+        &__svg__container {
+            display:block;
+        }
+    }
+}

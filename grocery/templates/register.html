@@ -1,0 +1,91 @@
+{% extends 'layout.html' %}
+{% set active_page='register' %}
+
+{% block stylesheet %}
+<link rel="stylesheet" href="{{url_for('static',filename='css/register.css')}}">
+{% endblock %}
+
+{% block body %}
+<main class="registration--main">
+
+    <div class="registration__svg__container">
+        <img src="{{url_for('static',filename='site-images/register-svg.svg')}}" alt="Registration related svg Image" class="registration__svg">
+    </div>
+
+
+    <form class="registration__form" autocomplete="off" method="post">
+        {{form.hidden_tag()}}
+
+        <legend>Register here</legend>
+
+        <div class="form__group">
+            {{form.name.label}}
+            {% if form.name.errors %}
+                {{form.name(class="error__field")}}
+                {% for error in form.name.errors %}
+                    <span class="field__error__msg">{{error}}</span>
+                {% endfor %}
+            {% else %}
+                {{form.name(placeholder='enter your fullname')}}
+            {% endif %}
+        </div>
+
+        <div class="form__group">
+            {{form.username.label}}
+            {% if form.username.errors %}
+                {{form.username(class="error__field")}}
+                {% for error in form.username.errors %}
+                    <span class="field__error__msg">{{error}}</span>
+                {% endfor %}
+            {% else %}
+                {{form.username(placeholder='enter an username')}}
+            {% endif %}
+        </div>
+
+        <div class="form__group">
+            {{form.email.label}}
+            {% if form.email.errors %}
+                {{form.email(class="error__field")}}
+                {% for error in form.email.errors %}
+                    <span class="field__error__msg">{{error}}</span>
+                {% endfor %}
+            {% else %}
+                {{form.email(placeholder='enter your email address')}}
+            {% endif %}
+        </div>
+
+        <div class="form__group">
+            {{form.password.label}}
+            {% if form.password.errors %}
+                {{form.password(class="error__field")}}
+                {% for error in form.password.errors %}
+                    <span class="field__error__msg">{{error}}</span>
+                {% endfor %}
+            {% else %}
+                {{form.password(placeholder='enter a password')}}
+            {% endif %}
+        </div>
+
+        <div class="form__group">
+            {{form.reenter_password.label}}
+            {% if form.reenter_password.errors %}
+                {{form.reenter_password(class="error__field")}}
+                {% for error in form.reenter_password.errors %}
+                    <span class="field__error__msg">{{error}}</span>
+                {% endfor %}
+            {% else %}
+                {{form.reenter_password(placeholder='reenter the same password')}}
+            {% endif %}
+        </div>
+
+        <div class="form__recaptcha__group">
+            {{form.recaptcha}}
+        </div>
+
+        <div class="form__submit__group">
+            {{form.submit(class="btn")}}
+        </div>
+    </form>
+
+</main>
+{% endblock %}

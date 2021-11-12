@@ -1,0 +1,156 @@
+{% extends 'layout.html' %}
+{% set active_page='login' %}
+
+{% block stylesheet %}
+<link rel="stylesheet" href="{{url_for('static',filename='css/login.css')}}">
+{% endblock %}
+
+{% block body %}
+<main class="login--main">
+
+    <div class="login__forms__wrapper">
+
+        <h3>Login here</h3>
+
+
+        <!--------------- login forms toggle btns section -------------->
+        <div class="login__form__toggle__tabs__container">
+            <button class="login__email__form__tab login__active__tab">With email</button>
+            <button class="login__username__form__tab">With username</button>
+        </div>
+
+
+        <!-------------------- login forms section --------------------->
+        <div class="login__forms">
+
+            <!----------------- login form with email address -------------------->
+            <form  class="email__login__form login__form" autocomplete="off" method="post">
+                {{form.hidden_tag()}}
+
+                <div class="form__group">
+                    {{form.email.label}}
+                    {% if form.email.errors %}
+                        {{form.email(class="error__field")}}
+                        {% for error in form.email.errors %}
+                            <span class="field__error__msg">{{error}}</span>
+                        {% endfor %}
+                    {% else %}
+                        {{form.email(placeholder='enter your email address')}}
+                    {% endif %}
+                </div>
+
+                <div class="form__group">
+                    {{form.password.label}}
+                    {% if form.password.errors %}
+                        {{form.password(class="error__field")}}
+                        {% for error in form.password.errors %}
+                            <span class="field__error__msg">{{error}}</span>
+                        {% endfor %}
+                    {% else %}
+                        {{form.password(placeholder='enter a password')}}
+                    {% endif %}
+                </div>
+
+                <div class="form__remember__group">
+                    {{form.remember_me}}
+                    {{form.remember_me.label}}
+                </div>
+
+                <div class="form__submit__group">
+                    {{form.submit(class="btn")}}
+                </div>
+            </form>
+
+
+            <!------------------ login form with username ----------------->
+            <form  class="username__login__form login__form form__hidden" autocomplete="off" method="post">
+                {{form.hidden_tag()}}
+
+                <div class="form__group">
+                    {{form.username.label}}
+                    {% if form.username.errors %}
+                        {{form.username(class="error__field")}}
+                        {% for error in form.username.errors %}
+                            <span class="field__error__msg">{{error}}</span>
+                        {% endfor %}
+                    {% else %}
+                        {{form.username(placeholder='enter an username')}}
+                    {% endif %}
+                </div>
+
+                <div class="form__group">
+                    {{form.password.label}}
+                    {% if form.password.errors %}
+                        {{form.password(class="error__field")}}
+                        {% for error in form.password.errors %}
+                            <span class="field__error__msg">{{error}}</span>
+                        {% endfor %}
+                    {% else %}
+                        {{form.password(placeholder='enter a password')}}
+                    {% endif %}
+                </div>
+
+                <div class="form__remember__group">
+                    {{form.remember_me}}
+                    {{form.remember_me.label}}
+                </div>
+
+                <div class="form__submit__group">
+                    {{form.submit(class="btn")}}
+                </div>
+            </form>
+
+        </div>
+
+        <!------------------ forgot password page link ------------------>
+        <a href="#" class="forgot__password__link">Forgot password ?</a>
+
+
+        <!-------------------- registration page  link ------------------->
+        <div class="registration__page__link__container">
+            <p>New user 
+                <a href="{{url_for('register')}}" class="register__now__link" title='if you are a new user register now'>register now</a>
+            </p>
+        </div>
+
+    </div>
+
+
+    <!---------------- login page svg container  ---------------->
+    <div class="login__svg__container">
+        <img src="{{url_for('static',filename='site-images/login-svg.svg')}}" alt="user login svg image">
+    </div>
+
+</main>
+{% endblock %}
+
+{% block script %}
+<script>
+
+    const emailTab = document.querySelector('.login__email__form__tab');
+    const usernameTab = document.querySelector('.login__username__form__tab');
+    const emailForm = document.querySelector('.email__login__form');
+    const usernameForm = document.querySelector('.username__login__form');
+
+    // function to toggle form
+    const formToggleFunc = function (tabOne,tabTwo,formOne,formTwo) {
+        tabOne.classList.add('login__active__tab');
+        tabTwo.classList.remove('login__active__tab');
+
+        formOne.classList.remove('form__hidden');
+        formTwo.classList.add('form__hidden');
+    };
+
+    //email form tab
+    emailTab.addEventListener('click', function () {
+        formToggleFunc(this,usernameTab,emailForm,usernameForm);
+    });
+
+    //username form tab
+    usernameTab.addEventListener('click', function () {
+        formToggleFunc(this,emailTab,usernameForm,emailForm);
+    });
+
+
+</script>
+{% endblock %}
