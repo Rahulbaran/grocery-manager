@@ -42,9 +42,19 @@
         <!------------------- Navigation bar ---------------------->
         <nav class="navigation__bar">
             <a href="{{url_for('home')}}" class="navigation__link {{'navigation__link__active' if active_page=='home' else ''}}" title="Home">Home</a>
+
+            {% if current_user.is_authenticated %}
+            <a href="{{url_for('settings')}}" class="navigation__link {{'navigation__link__active' if active_page=='settings' else ''}}" title="Settings">Settings</a>
+            {% else %}
             <a href="{{url_for('login')}}" class="navigation__link {{'navigation__link__active' if active_page=='login' else ''}}" title="Login">Login</a>
             <a href="{{url_for('register')}}" class="navigation__link {{'navigation__link__active' if active_page=='register' else ''}}" title="Register">Register</a>
+            {% endif %}
+            
             <a href="{{url_for('contactUs')}}" class="navigation__link {{'navigation__link__active' if active_page=='contactUs' else ''}}" title="Contact Us">Contact Us</a>
+
+            {% if current_user.is_authenticated %}
+            <a href="{{url_for('logout')}}" class="navigation__link" title="Logout">Logout</a>
+            {% endif %}
         </nav>
 
     </header>

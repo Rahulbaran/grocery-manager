@@ -8,11 +8,13 @@
 {% block body %}
 <main class="registration--main">
 
+
     <div class="registration__svg__container">
         <img src="{{url_for('static',filename='site-images/register-svg.svg')}}" alt="Registration related svg Image" class="registration__svg">
     </div>
 
 
+    <!------------------------ Registration Form ---------------------------->
     <form class="registration__form" autocomplete="off" method="post">
         {{form.hidden_tag()}}
 
@@ -57,13 +59,25 @@
         <div class="form__group">
             {{form.password.label}}
             {% if form.password.errors %}
+            <div class="password__input__field">
                 {{form.password(class="error__field")}}
-                {% for error in form.password.errors %}
-                    <span class="field__error__msg">{{error}}</span>
-                {% endfor %}
+                <button class="password__toggle__btn">
+                    <i class="fas fa-eye"></i>
+                </button>
+            </div>
+            {% for error in form.password.errors %}
+                <span class="field__error__msg">{{error}}</span>
+            {% endfor %}
             {% else %}
-                {{form.password(placeholder='enter a password')}}
+                <div class="password__input__field">
+                    {{form.password(placeholder='enter a password')}}
+                    <button class="password__toggle__btn">
+                        <i class="fas fa-eye"></i>
+                    </button>
+                </div>
             {% endif %}
+                
+            
         </div>
 
         <div class="form__group">
@@ -88,4 +102,29 @@
     </form>
 
 </main>
+{% endblock %}
+
+{% block script %}
+<script>
+
+    //functionality to show/hide password
+    const passwordField = document.querySelector('.password__input__field input');
+    const passwordToggleBtn = document.querySelector('.password__toggle__btn i');
+    let show = true;
+
+
+    passwordToggleBtn.addEventListener('click', function () {
+        if (show) {
+            this.classList.replace('fa-eye','fa-eye-slash');
+            passwordField.setAttribute('type', 'text');
+            show = false;
+        }
+        else {
+            this.classList.replace('fa-eye-slash','fa-eye');
+            passwordField.setAttribute('type', 'password');
+            show = true;
+        }
+    });
+
+</script>
 {% endblock %}

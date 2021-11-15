@@ -3,6 +3,8 @@ from wtforms import StringField, SubmitField, PasswordField
 from wtforms.validators import InputRequired, Length, EqualTo, ValidationError
 from wtforms.fields.numeric import IntegerField
 from wtforms.fields.simple import EmailField, BooleanField
+from .models import User
+
 
 
 
@@ -27,17 +29,36 @@ class RegistrationForm(FlaskForm):
         if totalSpecialChar == 0:
             raise ValidationError('password should have atleast one special character')
 
+    def validate_email(self,email):
+        user = User.query.filter_by(email=email.data).first()
+        if user:
+            raise ValidationError('email is already exist')
+
+    def validate_username(self,username):
+        user = User.query.filter_by(username=username.data).first()
+        if user:
+            raise ValidationError('username is already exist')
+
+
 
 
 
 
 #User Login Form
 class LoginForm(FlaskForm):
-    username = StringField('Username', validators=[Length(min=5, max=50, message='username should be atleast 5 characters long'), InputRequired()])
-    email = EmailField('Email Address', validators=[InputRequired(), Length(max=200, message='email must be at max 200 characters long')]) 
+    emailOrUsername = StringField('Email or Username', validators=[InputRequired()]) 
     password = PasswordField('Password', validators=[Length(min=8, max=100,message='password should have characters in range of 8 to 100'), InputRequired()])
     remember_me = BooleanField(label='Remember Me')
     submit = SubmitField('Login')
+
+
+
+
+
+
+
+
+
 
 
 

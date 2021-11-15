@@ -6,6 +6,9 @@
 {% endblock %}
 
 {% block body %}
+{% if current_user.is_authenticated %}
+{% else %}
+{% endif %}
     <main class="home--logged--out--main">
 
         <div class="home__content__container">

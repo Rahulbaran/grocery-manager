@@ -27,7 +27,7 @@ class BaseConfig:
 class DevConfig(BaseConfig):
     DEVELOPMENT = True
     FLASK_ENV='development'
-    SQLALCHEMY_DATABASE_URI = os.environ.get('MYSQL_DB_URI') or 'sqlite:///Databases/development.db'
+    SQLALCHEMY_DATABASE_URI = os.environ.get('MYSQL_DB_URI') or 'sqlite:///Databases/dev.db'
 
 
 

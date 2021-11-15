@@ -163,7 +163,8 @@ body {
     width:100%;
     padding:.5rem 1rem;
     @include flex(center,center);
-    font-family:var(--secondary-font);
+    font-family:var(--tertiary-font);
+    line-height:1.25;
 
     span {
         font-weight:$medium-wt;

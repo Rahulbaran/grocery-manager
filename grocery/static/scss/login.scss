@@ -16,81 +16,38 @@
         img {
             height:28rem;
             display:block;
-            min-width:100%;
         }
     }
-
-    &__forms__wrapper {
-        display:flex;
-        justify-content:flex-start;
-        align-items:flex-start;
-        flex-direction:column;
-        padding:1.5rem 1rem;
-        background-color:var(--color-white);
-        border-radius:4px;
-        box-shadow:0 0 3px rgba(0,0,0,.3);
+    
+    &__form__container {
         width:100%;
         margin:0 auto;
-        font-family:var(--primary-font);
+        padding:1.5rem 1rem;
+        border-radius:3px;
+        box-shadow:0 0 2px rgba(0,0,0,.3);
+        background-color:var(--color-white);
+    }
 
-        h3 {
+    &__form {
+        width:100%;
+        display:grid;
+        grid-template-columns:1fr;
+        grid-gap:.3rem;
+        font-family:var(--primary-font);
+        color:var(--input-label-color);
+
+        legend {
             line-height:1rem;
             font-size:1.3rem;
             font-weight:600;
             font-family:var(--tertiary-font);
             color:var(--legend-color);
-            margin-bottom:1.5rem;
+            margin-bottom:.75rem;
             text-decoration:2px underline currentColor;
             text-underline-offset:2px;
         }
     }
-
-    &__form__toggle__tabs__container {
-        display:grid;
-        grid-template-columns:repeat(2,1fr);
-        width:100%;
-
-        button {
-            font-family:var(--tertiary-font);
-            font-size:.95rem;
-            width:100%;
-            padding:.5rem;
-            font-weight:500;
-            background-color:transparent;
-            border:none;
-            border-bottom:2px solid hsl(260,100%,90%);
-            color:var(--btn-color);
-            
-            &:hover,
-            &:focus {
-                border-color:currentColor;
-                cursor:pointer;
-            }
-        }
-    }
-
-    &__active__tab {
-        border-color: currentColor !important;
-    }
-
-    &__forms {
-        width:100%;
-    }
-
-    &__form {
-        display:grid;
-        grid-template-columns:1fr;
-        grid-gap:15px;
-        margin-top:.75rem;
-        color:var(--input-label-color);
-    }
 }
-
-//class to hide form
-.form__hidden {
-    display :none;
-}
-
 
 .form {
     &__group {
@@ -137,6 +94,7 @@
     }
 }
 
+
 //password forgot link and register now link
 .forgot__password__link,
 .register__now__link {
@@ -168,28 +126,32 @@
 
 //media queries
 @media screen and (min-width:481px){    
-    .login__forms__wrapper {
-        width:90%;
-        padding:1.5rem;
+    .login {
+        &__form__container {
+            width:90%;
+            padding:1.5rem;
+        }
     }
 }
+
 @media screen and (min-width:760px) {
     .login {
+        &__form__container {
+            width:80%;
+        }
+        
         &--main {
             padding:3rem;
         }
-
-        &__forms__wrapper {
-            width:80%;
-        }
     }
 }
+
 @media screen and (min-width:992px) {
     .login {
         &--main {
             grid-template-columns:repeat(2,1fr);
         }
-        &__forms__wrapper {
+        &__form__container {
             width:100%;
         }
         &__svg__container {
