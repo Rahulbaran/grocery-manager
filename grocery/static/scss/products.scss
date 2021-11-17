@@ -1,0 +1,148 @@
+//Grocery Products Container Styling
+.products--main--container {
+    background-image: linear-gradient(to right, #a34be7, #a745e8, #ac3ee8, #b036e9, #b52ce9, #b32dea, #b22eec, #b02fed, #a73af0, #9d42f2, #944af4, #8a50f6);
+    background-repeat:no-repeat;
+    min-height:90vh;
+    padding:2rem 0;
+}
+
+.products__container {
+    background-color:var(--color-white);
+    width:840px;
+    max-width:90%;
+    margin:0 auto;
+    box-shadow:0px 10px 20px rgba(0,0,0,.1),
+                10px 0 20px rgba(0,0,0,.06),
+                10px 20px 20px rgba(0,0,0,.1),
+                15px 5px 30px rgba(0,0,0,.1);
+    border-radius:3px;
+    display:flex;
+    justify-content:center;
+    align-items:stretch;
+    flex-direction:column;
+
+    h1 {
+        line-height:1.6rem;
+        padding:.75rem;
+        color:var(--h1-color);
+        font-size:2.25rem;
+        border-bottom:1px solid currentColor;
+        text-align:center;
+        font-weight:500;
+    }
+}
+
+.new__products__form {
+    display:grid;
+    justify-content:flex-start;
+    align-items:center;
+    grid-gap:.75rem;
+    grid-template-columns:1fr;
+    padding:1rem;
+}
+
+.new__product {
+    display:grid;
+    justify-content:space-between;
+    align-items:center;
+    grid-template-columns:1.75fr 1fr 1.25fr minmax(60px, 90px);
+    grid-gap:12px;
+
+    label {
+        display:flex;
+        justify-content:center;
+        align-items:flex-start;
+        flex-direction:column;
+
+        span {
+            font-size:.9rem;
+            font-weight:600;
+            line-height:1.2rem;
+            color:var(--input-label-color);
+        }
+        input {
+            font-family:inherit;
+            font-size:.95rem;
+            width:100%;
+            padding:.45rem .5rem;
+            border:1px solid var(--input-field-border);
+            border-radius:2px;
+            outline:none;
+            border-radius:3px;
+
+            &:focus {
+                outline:1px solid var(--color-black);
+            }
+        }
+    }
+
+    button {
+        align-self:flex-end;
+        padding:.5rem;
+        background-color:var(--del-btn-color);
+        color:var(--color-white);
+        text-transform:capitalize;
+    }
+}
+
+.add__product__btn {
+    justify-self:flex-end;
+    padding:.7rem 1rem;
+    background-color:hsl(130, 92%, 40%);
+    text-transform:capitalize;
+
+    i {
+        margin-right:.25rem;
+    }
+}
+
+
+.new__product__btn {
+   align-self:flex-start;
+   margin-left:1rem;
+   padding:.75rem 2rem;
+}
+
+
+
+//Products Table Styling
+.products__table__wrapper {
+    padding:1rem;
+}
+
+table {
+    width:100%;
+    border-collapse:collapse;
+
+    td,th {
+        border:1px solid rgba(0,0,0,.4);
+    }
+    thead {
+        background-color:var(--common-color);
+        color:var(--color-white);
+        
+        th {
+            font-weight:500;
+            padding:.5rem .3rem;
+            font-family:var(--tertiary-font);
+            letter-spacing:.5px;
+        }
+    }
+
+    tbody tr:nth-child(even) {
+        background-color:#eee;
+    }
+
+    tbody td {
+        font-family:var(--secondary-font);
+        text-align:center;
+        padding:.4rem;
+    }
+}
+
+.product__remove__btn {
+    padding:.35rem .6rem;
+    background-color:var(--del-btn-color);
+    color:var(--color-white);
+    text-transform:capitalize;
+}

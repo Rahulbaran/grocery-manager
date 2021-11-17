@@ -29,12 +29,14 @@ html{
     --tertiary-font:'Montserrat',sans-serif;
     --color-white:#fff;
     --color-black : #000;
+    --common-color:hsl(260,100%,55%);
     --header-grad-1:hsl(260,100%,40%);
     --header-grad-2:hsl(265,90%,40%);
     --header-grad-3:hsl(270,100%,50%);
     --nav-link-color:rgb(255, 253, 201);
     --h1-color:rgb(61, 64, 77);
     --btn-color:hsl(260, 100%, 50%);
+    --del-btn-color:hsl(0, 66%, 45%);
     --legend-color: rgb(73, 75, 84);
     --input-label-color:rgb(82, 80, 94);
     --input-field-border:#bbb;
@@ -62,7 +64,7 @@ body {
     background-color:var(--btn-color);
     border:none;
     border-radius:4px;
-    font-weight:$medium-wt;
+    font-weight:400;
     color:var(--color-white);
     letter-spacing:.5px;
     box-shadow:2px 2px 3px rgba(0,0,0,.2),2px 2px 2px var(--shadow-color);

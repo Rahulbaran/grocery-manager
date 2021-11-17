@@ -20,6 +20,9 @@ elif mode == "testing":
 bcrypt = Bcrypt(app)
 db = SQLAlchemy(app)
 login_manager = LoginManager(app)
+login_manager.login_view='login'
+login_manager.login_message = 'Please login to get the requested page'
+login_manager.login_message_category = 'info'
 
 
 from . import routes

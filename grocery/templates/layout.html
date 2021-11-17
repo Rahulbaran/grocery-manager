@@ -28,11 +28,6 @@
     {% block stylesheet %}
     {% endblock %}
 
-
-    <!------------------ Custom scripts ----------------->
-    <script src="{{url_for('static',filename='minjs/layout.js')}}" defer async></script>
-
-
 </head>
 <body>
     
@@ -91,5 +86,21 @@
     <!------------------  Jinja block for scripts ---------------->
     {% block script %}
     {% endblock %}
+
+
+    <script>
+        
+        //message hiding related functionality
+        const msgContainers = document.querySelectorAll('.msg__container');
+        const msgHideBtn = document.querySelectorAll('.msg__hide__btn');
+
+
+        msgHideBtn.forEach((btn,index) => {
+            btn?.addEventListener('click', () => {
+                msgContainers[index].style.display = 'none';
+            })
+        });
+
+    </script>
 </body>
 </html>

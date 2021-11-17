@@ -6,9 +6,55 @@
 {% endblock %}
 
 {% block body %}
+
 {% if current_user.is_authenticated %}
+    <main class="home--logged--in--main">
+
+        <div class="grocery__management__container">
+            <h1>Grocery Management System</h1>
+
+            <div class="grocery__links__container">
+                <a href="{{url_for('products')}}" class="manage__products__link">Manage Products</a>
+                <a href="#" class="new__order__link">New Order</a>
+            </div>
+
+            <!-------------- Table to show the items ordered by customers --------------->
+            <div class="order__table__container">
+                <table class="order__table">
+                    <thead>
+                        <tr>
+                            <th>SL No.</th>
+                            <th>Customer Name</th>
+                            <th>Order No.</th>
+                            <th>Order Date</th>
+                            <th>Total Cost (Rs)</th>
+                        </tr>
+                        
+                    </thead>
+
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>Rahul Kumar</td>
+                            <td>2</td>
+                            <td>14th Sep 2021</td>
+                            <td>34432</td>
+                        </tr>
+
+                    </tbody>
+
+                    <tfoot>
+                        <tr>
+                            <td colspan="5">Total - 34432/-</td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+
+        </div>
+
+    </main>
 {% else %}
-{% endif %}
     <main class="home--logged--out--main">
 
         <div class="home__content__container">
@@ -25,7 +71,9 @@
         </div>
 
     </main>
-{% endblock %}
+{% endif %}
+    
+{% endblock body %}
 
 {% block script %}
 {% endblock %}

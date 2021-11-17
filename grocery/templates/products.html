@@ -1,0 +1,91 @@
+{% extends 'layout.html' %}
+{% block stylesheet %}
+<link rel="stylesheet" href="{{url_for('static',filename='css/products.css')}}">
+{% endblock %}
+
+{% block body %}
+<main class="products--main--container">
+    
+    <!---------------------- New Products Container  ----------------------->
+    <div class="products__container">
+
+        <h1>Manage Grocery Products</h1>
+
+
+        <form class="new__products__form" autocomplete="off" method="post" spellcheck="false">
+
+            <div class="new__product">
+                <label>
+                    <span>Product Name</span>
+                    <input type="text" class="product__name" required placeholder="product name" name="productName" maxlength="200">
+                </label>
+            
+                <label>
+                    <span>Unit</span>
+                <input type="text" class="product__unit" required placeholder="product unit" name="productUnit" maxlength="20">
+                </label>
+            
+                <label>
+                    <span>Price (In Rs.)</span>
+                    <input type="number" class="product__price" required placeholder="product price" name="productPrice">
+                </label>
+    
+                <button type="button" class="new__product__remove__btn btn">
+                    Remove
+                </button>
+            </div>
+
+            <!----------------------- Add Products to Table  --------------------->
+            <button class="add__product__btn btn" type="submit">
+                <i class="fas fa-plus-circle"></i>
+                Add All Products
+            </button>
+
+        </form>
+
+
+        <!----------------------- Add More Products Button ----------------------->
+        <button class="new__product__btn btn">
+            New Product
+        </button>
+
+
+         <!------------------------ Products table wrapper ------------------------>
+        <div class="products__table__wrapper">
+            <table class="products__table">
+
+                <thead>
+                    <tr>
+                        <th>SL No.</th>
+                        <th>Product Name</th>
+                        <th>Unit</th>
+                        <th>Price (In Rs)</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for prod in allProducts %}
+                        <tr id="product--{{prod.id}}">
+                            <td>{{loop.index}}</td>
+                            <td>{{prod.name}}</td>
+                            <td>{{prod.unit}}</td>
+                            <td>{{prod.price}}</td>
+                            <td>
+                                <button class="product__remove__btn btn">Remove</button>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+
+            </table>
+        </div>
+
+    </div>
+
+</main>
+{% endblock body %}
+
+{% block script %}
+<script src="{{url_for('static', filename='js/products.js')}}"></script>
+{% endblock %}

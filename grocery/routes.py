@@ -2,7 +2,7 @@ from flask import request, url_for, render_template, make_response, redirect, fl
 from flask_login import login_user, logout_user, current_user, login_required
 from . import app, bcrypt, db
 from .form import RegistrationForm, LoginForm
-from .models import User
+from .models import User, Product
 
 
 
@@ -56,13 +56,15 @@ def login():
         password = lambda original, pw: bcrypt.check_password_hash(original, pw) 
 
         if emailUser and password(emailUser.password, form.password.data):
+            next = request.args.get('next')
             flash('Welcome back, You have logged in', 'info')
-            login_user(emailUser,remember=form.remember_me.data)
-            return redirect(url_for('home'))
+            login_user(emailUser, remember=form.remember_me.data)
+            return redirect(next) if next else redirect(url_for('home'))
         elif usernameUser and password(usernameUser.password, form.password.data):
             flash('Welcome back, You have logged in', 'info')
-            login_user(usernameUser,remember=form.remember_me.data)
-            return redirect(url_for('home'))
+            next = request.args.get('next')
+            login_user(usernameUser, remember=form.remember_me.data)
+            return redirect(next) if next else redirect(url_for('home'))
         else : 
             flash('Provided credentials doesn\'t match with our database', 'error')   
 
@@ -87,3 +89,34 @@ def logout():
 @login_required
 def settings():
     return render_template('settings.html', title='Settings')
+
+
+
+
+
+@app.route('/products', methods=["GET","POST"])
+@login_required
+def products():
+    allProducts = Product.query.filter_by(user_id=current_user.id).all()
+    return render_template('products.html', title='Manage Products', allProducts=allProducts)
+
+
+
+
+
+@app.route('/getProducts', methods=["POST"])
+@login_required
+def getProducts():
+    productsData = request.get_json()
+    newProducts = productsData.get('products')
+    if newProducts:
+        for prod in newProducts:
+            product = Product(name=prod[0], unit=prod[1], price=prod[2], product_user=current_user)
+            db.session.add(product)
+        db.session.commit()
+
+        resProductsData = Product.query.filter_by(user_id=current_user.id).order_by(Product.id.desc()).limit(len(newProducts)).all()
+        resProducts = list()
+        for resProduct in resProductsData:
+            resProducts.append([resProduct.id,resProduct.name,resProduct.unit,resProduct.price])
+        return {'newProducts' : resProducts}
