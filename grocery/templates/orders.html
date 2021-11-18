@@ -1,0 +1,17 @@
+{% extends 'layout.html' %}
+{% block stylesheet %}
+    <link rel="stylesheet" href="{{url_for('static', filename='css/orders.css')}}">
+{% endblock stylesheet %}
+
+{% block body %}
+    <main class="new--orders--main--container">
+        
+        <div class="new__orders__container">
+
+        </div>
+    </main>
+{% endblock body %}
+
+{% block script %}
+    <script src="{{url_for('static',filename='minjs/orders.js')}}"></script>
+{% endblock script %}

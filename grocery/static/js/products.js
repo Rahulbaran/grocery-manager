@@ -1,6 +1,8 @@
 const newProductsForm = document.querySelector('.new__products__form');
 const newProductBtn = document.querySelector('.new__product__btn');
 const addProductBtn = document.querySelector('.add__product__btn');
+const productsTable = document.querySelector('.products__table');
+
 
 
 
@@ -10,6 +12,7 @@ newProductBtn.addEventListener('click', () => {
     const newProductInput = `<div class="new__product"><label><span>Product Name</span><input type="text" class="product__name" required placeholder="product name"></label><label><span>Unit</span><input type="text" class="product__unit" required placeholder="product unit"></label><label><span>Price (In Rs.)</span><input type="number" class="product__price" required placeholder="product price"></label><button type="button" class="new__product__remove__btn btn">Remove</button></div>`;
     newProductsForm.insertAdjacentHTML('afterbegin', newProductInput);
 });
+
 
 
 
@@ -24,14 +27,14 @@ newProductsForm.addEventListener('click', function (e) {
 
 
 
-//event handler to make a http request for sending new product data
-newProductsForm.addEventListener('submit', e => {
+//event handler to make a http request for sending new products data
+newProductsForm.addEventListener('submit', function (e) {
 
     //1. prevent default submit behaviour
     e.preventDefault();
 
     
-     // 2. Pushing product data in products array
+    //2. Pushing product data in products array
     const children = e.target.children;
     const products = [];
     
@@ -49,8 +52,9 @@ newProductsForm.addEventListener('submit', e => {
 
     
     //3. Removing product input fields
-    for(let prod = 0; prod < children.length - 2; prod++) {
-        newProductsForm.removeChild(newProductsForm.firstChild);
+    const totalChildren = children.length - 2;
+    for(let prod = 0; prod < totalChildren; prod++) {
+        this.removeChild(this.firstChild);
     }
     
     
@@ -59,9 +63,7 @@ newProductsForm.addEventListener('submit', e => {
     const init = {
         mode : 'same-origin',
         method : 'POST',
-        headers : {
-            'Content-Type' : 'application/json'
-        },
+        headers : { 'Content-Type' : 'application/json' },
         body : JSON.stringify({'products' : products})
     };
     
@@ -70,12 +72,74 @@ newProductsForm.addEventListener('submit', e => {
         if (res.status === 200) {
             res.json()
             .then(res => {
+
                 const products = res.newProducts;
-                products.forEach(prod => console.table(prod));
-            })
+                const tableBody = document.querySelector('tbody');
+
+                products.forEach(prod => {
+
+                    const lastIndex = tableBody.children.length;
+                    const newProduct = `<tr id="product--${prod[0]}"><td>${lastIndex+1}</td><td>${prod[1]}</td><td>${prod[2]}</td><td>${prod[3]}</td><td><button class="product__remove__btn btn">Remove</button></td></tr>`;
+
+                    tableBody.insertAdjacentHTML('beforeend',newProduct);
+                });
+            });
         }
         else console.error('Did not get the result')
     })
-    .catch(() => console.error('Got the result'));
+    .catch(() => console.error('Something went wrong while getting making the request'));
 
 });
+
+
+
+
+
+//event handler to remove product(s) from the product list
+productsTable.addEventListener('click', function (e) {
+    
+    const removeBtn = e.target.classList.contains('product__remove__btn');
+
+    if(removeBtn) {
+        const product = e.target.parentNode.parentNode
+
+        //1. get the product id
+        const productId = product.id.split('--')[1];
+       
+
+        //2. remove product from db
+        const init = {
+            mode : 'same-origin',
+            method : 'POST',
+            headers : {
+                'Content-Type' : 'application/json'
+            },
+            cache : 'default',
+            body : JSON.stringify({id : +productId})
+        };
+
+        fetch('/removeProduct', init)
+        .then(res => {
+            if (res.status === 200) {
+                return;
+            }
+            else {
+                console.error(res);
+            }
+        })
+        .catch(console.error);
+        
+
+        //3. remove product from ui
+        this.children[1].removeChild(product);
+
+
+        //4. update product indexes in ui
+        const totalProducts = this.children[1].children.length;
+        const allProducts = this.children[1].children;
+
+        for(let i=1;i <= totalProducts;i++){
+            allProducts[i-1].firstElementChild.textContent = i;
+        }
+    }
+})

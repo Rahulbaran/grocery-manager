@@ -94,7 +94,7 @@ def settings():
 
 
 
-@app.route('/products', methods=["GET","POST"])
+@app.route('/products')
 @login_required
 def products():
     allProducts = Product.query.filter_by(user_id=current_user.id).all()
@@ -119,4 +119,30 @@ def getProducts():
         resProducts = list()
         for resProduct in resProductsData:
             resProducts.append([resProduct.id,resProduct.name,resProduct.unit,resProduct.price])
+        resProducts.reverse()
         return {'newProducts' : resProducts}
+
+
+
+
+
+@app.route('/removeProduct', methods=["POST"])
+@login_required
+def removeProduct():
+    productId = request.get_json().get('id')
+    try:
+        product = Product.query.get_or_404(productId)
+        db.session.delete(product)
+        db.session.commit()
+        return 'OK'
+    except ConnectionError as ConError:
+        raise ConError('Something went wrong')
+
+
+
+
+
+@app.route('/orders')
+@login_required
+def orders():
+    return render_template('orders.html', title='Manage Orders')

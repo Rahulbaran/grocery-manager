@@ -1,1 +1,1 @@
-{"version":3,"sources":["home.js"],"names":["fun","console","log","arr","newArray"],"mappings":"AAAA,MAAMA,IAAM,KACRC,QAAQC,IAAI,SAAZD,QAAQC,IAAI,QAOhB,MAAMC,IAAM,CAAC,EAAE,GAAG,GACZC,SAAW,IAAID,IAAK,EAAE","file":"home.js","sourcesContent":["const fun = () => {\n    console.log('Name');\n};\n\nfun();\n\n\n\nconst arr = [4,56,4];\nconst newArray = [...arr, 5,3];"]}
+{"version":3,"sources":[],"names":[],"mappings":"","file":"home.js","sourcesContent":[]}
