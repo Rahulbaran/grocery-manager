@@ -99,6 +99,14 @@
         <div class="form__submit__group">
             {{form.submit(class="btn")}}
         </div>
+
+        <!-------------------- login page link------------------->
+        <div class="login__page__link__container">
+            <p>Already have an account 
+                <a href="{{url_for('login')}}" class="login__now__link" title='If you already have an account, login now'>login now</a>
+            </p>
+        </div>
+
     </form>
 
 </main>

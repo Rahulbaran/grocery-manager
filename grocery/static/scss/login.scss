@@ -95,7 +95,9 @@
 }
 
 
-//password forgot link and register now link
+/************************
+password forgot link and register now link
+*************************/
 .forgot__password__link,
 .register__now__link {
     text-decoration:none;
@@ -124,7 +126,9 @@
 
 
 
-//media queries
+/************************
+media queries
+*************************/
 @media screen and (min-width:481px){    
     .login {
         &__form__container {

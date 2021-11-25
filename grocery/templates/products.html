@@ -12,28 +12,34 @@
             <h1>Manage Grocery Products</h1>
 
 
-            <form class="new__products__form" autocomplete="off" method="post" spellcheck="false">
+            <form class="new__products__form" autocomplete="off" spellcheck="false">
 
-                <div class="new__product">
-                    <label>
-                        <span>Product Name</span>
-                        <input type="text" class="product__name" required placeholder="product name" name="productName" maxlength="200">
-                    </label>
-                
-                    <label>
-                        <span>Unit</span>
-                    <input type="text" class="product__unit" required placeholder="product unit" name="productUnit" maxlength="20">
-                    </label>
-                
-                    <label>
-                        <span>Price (In Rs.)</span>
-                        <input type="number" class="product__price" required placeholder="product price" name="productPrice">
-                    </label>
-        
-                    <button type="button" class="new__product__remove__btn btn">
-                        Remove
-                    </button>
+
+                <!------------------ new Product input Fields Container  ----------------->
+                <div class="new__products__fields__container">
+                    
+                    <div class="new__product">
+                        <label>
+                            <span>Product Name</span>
+                            <input type="text" class="product__name" required placeholder="product name" name="productName" maxlength="200" title="product name should be maximum 200 characters long">
+                        </label>
+                    
+                        <label>
+                            <span>Unit</span>
+                        <input type="text" class="product__unit" required placeholder="product unit" name="productUnit" maxlength="20" title="product unit should be maximum 20 characters long">
+                        </label>
+                    
+                        <label>
+                            <span>Price (Rs.)</span>
+                            <input type="number" class="product__price" maxlength="10" required placeholder="product price" name="productPrice" title="product price should be maximum 10 characters long">
+                        </label>
+            
+                        <button type="button" class="new__product__remove__btn btn">
+                            Remove
+                        </button>
+                    </div>
                 </div>
+                    
 
                 <!----------------------- Add Products to Table  --------------------->
                 <button class="add__product__btn btn" type="submit">
@@ -59,7 +65,7 @@
                             <th>SL No.</th>
                             <th>Product Name</th>
                             <th>Unit</th>
-                            <th>Price (In Rs)</th>
+                            <th>Price (Rs.)</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -89,3 +95,8 @@
 {% block script %}
     <script src="{{url_for('static', filename='minjs/products.js')}}"></script>
 {% endblock %}
+
+
+
+
+

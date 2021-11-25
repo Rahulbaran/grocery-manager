@@ -13,9 +13,13 @@
         <div class="grocery__management__container">
             <h1>Grocery Management System</h1>
 
+            <h3>Shopname - 
+                <span>{% if current_user.shopname %}{{current_user.shopname}}{% else %}Not Available{% endif %}</span>
+            </h3>
+
             <div class="grocery__links__container">
                 <a href="{{url_for('products')}}" class="manage__products__link" title='manage grocery products'>Manage Products</a>
-                <a href="{{url_for('orders')}}" class="new__order__link" title='manage new orders'>New Order</a>
+                <a href="{{url_for('orders')}}" class="new__order__link" title='manage new orders'>Manage Orders</a>
             </div>
 
             <!-------------- Table to show the items ordered by customers --------------->
@@ -33,19 +37,20 @@
                     </thead>
 
                     <tbody>
+                        {% for ord in userOrders %}
                         <tr>
-                            <td>1</td>
-                            <td>Rahul Kumar</td>
-                            <td>2</td>
-                            <td>14th Sep 2021</td>
-                            <td>34432</td>
+                            <td>{{loop.index}}</td>
+                            <td>{{ord.customer}}</td>
+                            <td>{{ord.id}}</td>
+                            <td>{{ord.order_date.strftime('%d %b %Y')}}</td>
+                            <td>{{ord.total}}</td>
                         </tr>
-
+                        {% endfor %}
                     </tbody>
 
                     <tfoot>
                         <tr>
-                            <td colspan="5">Total - 34432/-</td>
+                            <td colspan="5">Total - {{total}}/-</td>
                         </tr>
                     </tfoot>
                 </table>
@@ -54,6 +59,7 @@
         </div>
 
     </main>
+
 {% else %}
     <main class="home--logged--out--main">
 

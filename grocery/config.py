@@ -2,7 +2,7 @@ import os
 from dotenv import load_dotenv
 
 load_dotenv(os.path.abspath('.env'))
-baseDir = os.path.realpath(os.path.abspath(__file__))
+baseDir = os.path.abspath('.')
 
 
 
@@ -20,7 +20,8 @@ class BaseConfig:
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     RECAPTCHA_PUBLIC_KEY=os.environ.get('RECAPTCHA_PUBLIC_KEY')
     RECAPTCHA_PRIVATE_KEY=os.environ.get('RECAPTCHA_PRIVATE_KEY')
-
+    MAX_CONTENT_LENGTH = 16*1024*1024
+    UPLOAD_FOLDER = os.path.join(baseDir, 'static', 'user-images')
 
 
 

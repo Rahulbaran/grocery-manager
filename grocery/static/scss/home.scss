@@ -138,7 +138,7 @@
 .home--logged--in--main {
     background-image: linear-gradient(to right, #a34be7, #a745e8, #ac3ee8, #b036e9, #b52ce9, #b32dea, #b22eec, #b02fed, #a73af0, #9d42f2, #944af4, #8a50f6);
     background-repeat:no-repeat;
-    min-height:90vh;
+    min-height:93vh;
     padding:2rem 0;
 }
 
@@ -161,6 +161,16 @@
         border-bottom:1px solid currentColor;
         text-align:center;
         font-weight:500;
+    }
+    h3 {
+        padding:1.5rem 1rem 0;
+        color:var(--common-color);
+
+        span {
+            font-weight:400;
+            color:var(--color-black);
+            font-size:1.1rem;
+        }
     }
 }
 
@@ -218,6 +228,7 @@ table {
             padding:.5rem .3rem;
             font-family:var(--tertiary-font);
             letter-spacing:.5px;
+            font-size:.95rem;
         }
     }
 
@@ -234,7 +245,8 @@ table {
         font-family:var(--secondary-font);
         border:none;
         text-align:right;
-        font-weight:600;
+        font-weight:500;
+        font-size:1.1rem;
     }
 }
 

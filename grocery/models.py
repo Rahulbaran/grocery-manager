@@ -19,7 +19,7 @@ class User(db.Model):
     join_date = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
     shopname = db.Column(db.String(200))
     product = db.relationship('Product', backref="product_user", lazy='dynamic')
-
+    order = db.relationship('Order', backref='order_user', lazy='dynamic')
 
     # Methods to use flask_login package
     def is_active(self):
@@ -30,7 +30,6 @@ class User(db.Model):
         return True
     def get_id(self):
         return self.id
-
 
     def __repr__(self):
         return f'User({self.name}, {self.email}, {self.shopname})'
@@ -50,3 +49,21 @@ class Product(db.Model):
 
     def __repr__(self):
         return f'Product({self.name} {self.unit} {self.price} {self.user_id})'
+
+
+
+
+# Model for new order
+class Order(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    customer = db.Column(db.String(200), nullable=False)
+    product_name = db.Column(db.String(200), nullable=False)
+    quantity = db.Column(db.Integer, nullable=False)
+    total = db.Column(db.Integer, nullable=False)
+    order_date = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
+    product_unit = db.Column(db.String(20), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+
+
+    def __repr__(self):
+        return f'Order({self.customer},{self.product_name}, {self.total})'
