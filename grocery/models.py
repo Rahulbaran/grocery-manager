@@ -16,8 +16,10 @@ class User(db.Model):
     username = db.Column(db.String(50), nullable=False, unique=True)
     email = db.Column(db.String(200), nullable=False, unique=True)
     password = db.Column(db.String(100), nullable=False)
+    avatar = db.Column(db.String(100),nullable=False,default='default.png')
     join_date = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
     shopname = db.Column(db.String(200))
+    location = db.Column(db.String(100))
     product = db.relationship('Product', backref="product_user", lazy='dynamic')
     order = db.relationship('Order', backref='order_user', lazy='dynamic')
 

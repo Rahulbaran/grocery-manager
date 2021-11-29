@@ -11,10 +11,10 @@ from .models import User
 
 # User Registration Form
 class RegistrationForm(FlaskForm):
-    name = StringField('Fullname', validators=[Length(min=5,max=100,message='name should be atleast 5 characters long'), InputRequired()])
+    name = StringField('Fullname', validators=[Length(min=5, max=100, message='name should be atleast 5 characters long'), InputRequired()])
     username = StringField('Username', validators=[Length(min=5, max=50, message='username should be atleast 5 characters long'), InputRequired()])
-    email = EmailField('Email Address', validators=[InputRequired(), Length(max=200, message='email must be at max 200 characters long')])
-    password = PasswordField('Password', validators=[Length(min=8, max=100,message='password should have characters in range of 8 to 100'), InputRequired()])
+    email = EmailField('Email Address', validators=[InputRequired(), Length(min=10, max=200, message='email must be at max 200 characters long')])
+    password = PasswordField('Password', validators=[Length(min=8, max=100, message='password should have characters in range of 8 to 100'), InputRequired()])
     reenter_password = PasswordField('Re-enter Password', validators=[EqualTo('password', message='should match with password')])
     recaptcha = RecaptchaField()
     submit = SubmitField('Register')
@@ -44,7 +44,7 @@ class RegistrationForm(FlaskForm):
 
 
 
-#User Login Form
+# User Login Form
 class LoginForm(FlaskForm):
     emailOrUsername = StringField('Email or Username', validators=[InputRequired()]) 
     password = PasswordField('Password', validators=[Length(min=8, max=100,message='password should have characters in range of 8 to 100'), InputRequired()])
@@ -56,11 +56,19 @@ class LoginForm(FlaskForm):
 
 
 
+# Update General Details Form
+class UpdateGeneralDetailsForm(FlaskForm):
+    name = StringField('Fullname', validators = [Length(min=5, max=100), InputRequired()])
+    shopName = StringField('Shopname', validators = [Length(min=10, max=100)])
+    location =StringField('Location', validators = [Length(min=10, max=200)])
+    submit = SubmitField('Update')
 
 
 
 
 
-
-
-# shopname = StringField('Shop Name', validators=[InputRequired(), Length(max=100, message='shopname must be at max 100 characters long')])
+# Update username and email Form
+class UpdateAccountForm(FlaskForm):
+    username = StringField('Username', validators=[Length(min=5, max=50), InputRequired()])
+    email = EmailField('Email Address', validators=[InputRequired(), Length(min=10, max=200)]) 
+    submit = SubmitField('Update')

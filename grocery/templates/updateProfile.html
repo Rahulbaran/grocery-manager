@@ -1,0 +1,57 @@
+{% extends 'layout.html' %}
+{% block stylesheet %}
+    <link rel="stylesheet" href="{{url_for('static',filename='css/userProfile.css')}}">
+{% endblock %}
+
+{% block body %}
+    <main class="profile--update--section">
+
+        <h2>Update Profile</h2>
+
+
+        <form class="general--details--form" autocomplete="off">
+            {{generalForm.hidden_tag()}}
+
+            <div class="form__group">
+                {{generalForm.name.label}}
+                {{generalForm.name(placeholder="enter new name")}}
+                <span></span>
+            </div>
+
+            <div class="form__group">
+                {{generalForm.shopName.label}}
+                {{generalForm.shopName(placeholder='enter your shopname')}}
+                <span></span>
+            </div>
+
+            <div class="form__group">
+                {{generalForm.location.label}}
+                {{generalForm.location(placeholder="enter your location")}}
+                <span></span>
+            </div>
+
+            <div class="form__submit__form">
+                {{generalForm.submit}}
+            </div>
+
+        </form>
+        
+
+        <form class="update--account--form" autocomplete="off">
+            {{accountForm.hidden_tag()}}
+
+            <div class="form__group">
+                {{form.username.label}}
+                {{form.username(placeholder="enter an username")}}
+                <span></span>
+            </div>
+
+            <div class="form__group">
+                {{form.email.label}}
+                {{form.email(placeholder="enter an email address")}}
+                <span></span>
+            </div>
+        </form>
+
+    </main>
+{% endblock %}

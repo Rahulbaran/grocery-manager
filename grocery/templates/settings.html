@@ -6,4 +6,49 @@
 {% endblock %}
 
 {% block body %}
+<main class="user--settings--section user__card">
+
+    <div class="user__avatar__card__section">
+        <img src="../static/user-images/{{current_user.avatar}}" alt="User Profile Picture">
+    </div>
+
+
+    <div class="user__details__card__section">
+        <h1>{{current_user.name}}</h1>
+
+        <p class="username info__with__icon">
+            <i class="fas fa-user"></i>
+            <span>@{{current_user.username}}</span>
+        </p>
+
+        <p class="email info__with__icon">
+            <i class="fas fa-envelope"></i>
+            <span>{{current_user.email}}</span>
+        </p>
+
+        {% if current_user.location %}
+        <p class="location info__with__icon">
+            <i class="fas fa-map-marker-alt"></i>
+            <span>{{current_user.location}}</span>
+        </p>
+        {% endif %}
+
+        <p class="shopname info__with__icon">
+            <i class="fas fa-store"></i>
+            <span>
+                {{current_user.shopname if current_user.shopname  else '--------------' }}
+            </span>
+        </p>
+
+        <p class="joindate">
+            Joined on {{current_user.join_date.strftime('%d %b %Y')}}
+        </p>
+
+        <a href="{{url_for('updateProfile')}}" class="update__profile__link">
+            Update Profile
+        </a>
+
+    </div>
+
+</main>
 {% endblock %}

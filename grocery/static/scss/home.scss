@@ -255,9 +255,9 @@ table {
 
 
 
-
-
-//media queries
+/********************
+media queries
+*********************/
 @media screen and (min-width:761px) {
     .home--logged--out--main {
         grid-template-columns:repeat(2,1fr);

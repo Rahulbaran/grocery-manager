@@ -1,7 +1,7 @@
 from flask import request, url_for, render_template, make_response, redirect, flash
 from flask_login import login_user, logout_user, current_user, login_required
 from . import app, bcrypt, db
-from .form import RegistrationForm, LoginForm
+from .form import RegistrationForm, LoginForm, UpdateAccountForm, UpdateGeneralDetailsForm
 from .models import User, Product, Order
 
 
@@ -88,14 +88,6 @@ def logout():
     flash('You have logged out from the site', 'info')
     return redirect(url_for('home'))
 
-
-
-
-
-@app.route('/settings', methods=["POST","GET"])
-@login_required
-def settings():
-    return render_template('settings.html', title='Settings')
 
 
 
@@ -216,3 +208,23 @@ def removeOrder():
         return 'OK'
     except ConnectionError as ConError:
         raise ConError('Something went wrong')
+
+
+
+
+
+@app.route('/settings')
+@login_required
+def settings():
+    return render_template('settings.html', title='User Settings')
+
+
+
+
+
+@app.route('/updateProfile')
+@login_required
+def updateProfile():
+    generalForm = UpdateGeneralDetailsForm()
+    accountForm = UpdateAccountForm()
+    return render_template('updateProfile.html', title='Update Profile', accountForm=accountForm, generalForm=generalForm)

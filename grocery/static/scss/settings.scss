@@ -1,0 +1,103 @@
+/**********************
+User Profile Styling
+***********************/
+.user {
+    &--settings--section {
+        background-color:var(--profile-bg-color);
+        width:95%;
+        max-width:840px;
+        margin:3rem auto;
+        box-shadow:0 0 20px var(--shadow-color);
+        border-radius:4px;
+        display:grid;
+        grid-template-columns:1fr;
+        justify-items:center;
+        align-items:center;
+
+        &:hover {
+            box-shadow:0 0 5px var(--shadow-color);
+        }
+    }
+
+    &__avatar__card__section {
+        background-color:hsl(40,100%,94%);
+        padding:2.5rem 1rem;
+        width:100%;
+        height:100.1%;
+        display:flex;
+        justify-content:Center;
+        align-items:center;
+        clip-path:polygon(0 0,100% 0,100% 90%,0 100%);
+        
+        img {
+            display:inline-block;
+            width:13rem;
+            height:13rem;
+            object-fit:cover;
+            border-radius:10% 10% 10% 10%;
+            border:3px dashed #555;
+        }
+    }
+
+    &__details__card__section {
+        color:var(--profile-card-color);
+        padding:2.5rem 1rem;
+
+        h1 {
+            font-family:var(--tertiary-font);
+            font-size:1.8rem;
+            margin-bottom:.6rem;
+        }
+
+        p {
+            line-height:1.8;
+        }
+
+        .info__with__icon i {
+            margin-right:.4rem;
+        }
+    }
+}
+
+.update__profile__link {
+    margin-top:1.1rem;
+    display:inline-block;
+    background-color:var(--profile-card-color);
+    padding:.6rem .75rem;
+    border-radius:4px;
+    text-decoration:none;
+    font-family:var(--tertiary-font);
+    font-weight:600;
+    text-transform:uppercase;
+    color:#222;
+    box-shadow:2px 2px 2px hsla(40,100%,60%,.4);
+    transition:transform 250ms ease-out,box-shadow 250ms ease-out;
+
+    &:hover,
+    &:focus {
+        transform:translateY(-3px);
+        box-shadow:4px 4px 6px hsla(40,100%,60%,.5);
+    }
+
+    &:active {
+        transform:translateY(-1px);
+        box-shadow:3px 3px 4px hsla(40,100%,60%,.4);
+    }
+}
+
+
+
+
+
+/***********************
+MEDIA QUERIES
+************************/
+@media screen and (min-width:640px) {
+    .user--settings--section {
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .user__avatar__card__section {
+        clip-path:polygon(0 0,100% 0,90% 100%,0 100%);
+    }
+}
