@@ -1,3 +1,5 @@
+import os,secrets
+from PIL import Image
 from flask import request, url_for, render_template, make_response, redirect, flash
 from flask_login import login_user, logout_user, current_user, login_required
 from . import app, bcrypt, db
@@ -87,7 +89,6 @@ def logout():
     logout_user()
     flash('You have logged out from the site', 'info')
     return redirect(url_for('home'))
-
 
 
 
@@ -227,4 +228,45 @@ def settings():
 def updateProfile():
     generalForm = UpdateGeneralDetailsForm()
     accountForm = UpdateAccountForm()
+    if request.method == "GET":
+        generalForm.name.data = current_user.name
+        generalForm.shopName.data = current_user.shopname
+        generalForm.location.data = current_user.location
+        accountForm.username.data = current_user.username
+        accountForm.email.data = current_user.email
     return render_template('updateProfile.html', title='Update Profile', accountForm=accountForm, generalForm=generalForm)
+
+
+
+
+
+def uploadFunc (pic):
+    random_hex = secrets.token_hex(8)
+    _,ext = os.path.splitext(pic.filename)
+    mod_pic = random_hex + ext
+    path = os.path.join(app.root_path,'static','user-images',mod_pic)
+
+    size = (720,720)
+    img = Image.open(pic)
+    img.thumbnail(size)
+    img.save(path)
+
+    if current_user.avatar != 'default.png':
+        os.remove(os.path.join(app.root_path,'static','user-images',current_user.avatar))
+
+    return mod_pic
+
+
+@app.route('/uploadAvatar',methods=["post"])
+@login_required
+def uploadAvatar():
+    data = request.files
+    try:
+        img = data['avatar']
+        newImage = (uploadFunc(img))
+        current_user.avatar = newImage
+        db.session.commit();
+        return {'pic' : newImage}
+    except Exception:
+        return None,404
+

@@ -1,14 +1,15 @@
 {% extends 'layout.html' %}
 {% block stylesheet %}
-    <link rel="stylesheet" href="{{url_for('static',filename='css/userProfile.css')}}">
+    <link rel="stylesheet" href="{{url_for('static',filename='css/updateProfile.css')}}">
 {% endblock %}
 
 {% block body %}
     <main class="profile--update--section">
 
-        <h2>Update Profile</h2>
+        <h1>Update Profile</h1>
 
 
+        <!--------------- Form to update general information ---------------->
         <form class="general--details--form" autocomplete="off">
             {{generalForm.hidden_tag()}}
 
@@ -30,28 +31,56 @@
                 <span></span>
             </div>
 
-            <div class="form__submit__form">
-                {{generalForm.submit}}
+            <div class="form__submit__group">
+                {{generalForm.submit(class="btn")}}
             </div>
 
         </form>
         
 
+        <!------------ Form to update account related informations ------------>
         <form class="update--account--form" autocomplete="off">
             {{accountForm.hidden_tag()}}
 
             <div class="form__group">
-                {{form.username.label}}
-                {{form.username(placeholder="enter an username")}}
+                {{accountForm.username.label}}
+                {{accountForm.username(placeholder="enter an username")}}
                 <span></span>
             </div>
 
             <div class="form__group">
-                {{form.email.label}}
-                {{form.email(placeholder="enter an email address")}}
+                {{accountForm.email.label}}
+                {{accountForm.email(placeholder="enter an email address")}}
                 <span></span>
+            </div>
+
+            <div class="form__submit__group">
+                {{accountForm.submit(class="btn")}}
             </div>
         </form>
 
+
+        <!----------------------- Form to upload avatar ------------------------>
+        <div class="dropArea">
+            <h3>
+                Upload your profile pic (upto 16MB)
+            </h3>
+
+            <form class="avatar--upload--form">
+                <div>
+                    <label>Drag and Drop</label>
+                    <span>Or</span>
+                    <input type="file" name="avatar" id="avatar--file" accept="image/*">
+                </div>
+            </form>
+
+            <span class="error--msg"></span>
+        </div>
+        
+
     </main>
+{% endblock %}
+
+{% block script %}
+    <script src="{{url_for('static',filename='minjs/updateProfile.js')}}"></script>
 {% endblock %}
