@@ -15,43 +15,56 @@
 
             <div class="form__group">
                 {{generalForm.name.label}}
-                {{generalForm.name(placeholder="enter new name")}}
-                <span></span>
+                {{generalForm.name(placeholder="enter new name",class="name__Field")}}
+                <span class="name__error__msg error__msg"></span>
             </div>
 
             <div class="form__group">
                 {{generalForm.shopName.label}}
-                {{generalForm.shopName(placeholder='enter your shopname')}}
-                <span></span>
+                {{generalForm.shopName(placeholder='enter your shopname',class="shopname__Field")}}
+                <span class="shopname__error__msg error__msg"></span>
             </div>
 
             <div class="form__group">
                 {{generalForm.location.label}}
-                {{generalForm.location(placeholder="enter your location")}}
-                <span></span>
+                {{generalForm.location(placeholder="enter your location",class="location__Field")}}
+                <span class="location__error__msg error__msg"></span>
             </div>
 
             <div class="form__submit__group">
                 {{generalForm.submit(class="btn")}}
             </div>
 
+            <span class="general__form__error__msg error__msg"></span>
         </form>
         
 
         <!------------ Form to update account related informations ------------>
-        <form class="update--account--form" autocomplete="off">
+        <form class="update--account--form" autocomplete="off" method="post">
             {{accountForm.hidden_tag()}}
 
             <div class="form__group">
                 {{accountForm.username.label}}
+                {% if accountForm.username.errors %}
+                {{accountForm.username(class="field__error")}}
+                {% for msg in accountForm.username.errors %}
+                <span class="error__msg">{{msg}}</span>
+                {% endfor %}
+                {% else %}
                 {{accountForm.username(placeholder="enter an username")}}
-                <span></span>
+                {% endif %}
             </div>
 
             <div class="form__group">
                 {{accountForm.email.label}}
+                {% if accountForm.email.errors %}
+                {{accountForm.email(class="field__error")}}
+                {% for msg in accountForm.email.errors %}
+                <span class="error__msg">{{msg}}</span>
+                {% endfor %}
+                {% else %}
                 {{accountForm.email(placeholder="enter an email address")}}
-                <span></span>
+                {% endif %}
             </div>
 
             <div class="form__submit__group">
@@ -74,7 +87,7 @@
                 </div>
             </form>
 
-            <span class="error--msg"></span>
+            <span class="upload__error__msg error__msg"></span>
         </div>
         
 

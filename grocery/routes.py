@@ -223,7 +223,7 @@ def settings():
 
 
 
-@app.route('/updateProfile')
+@app.route('/updateProfile', methods=["POST","GET"])
 @login_required
 def updateProfile():
     generalForm = UpdateGeneralDetailsForm()
@@ -234,6 +234,12 @@ def updateProfile():
         generalForm.location.data = current_user.location
         accountForm.username.data = current_user.username
         accountForm.email.data = current_user.email
+    if accountForm.validate_on_submit():
+        current_user.username = accountForm.username.data
+        current_user.email = accountForm.email.data
+        db.session.commit()
+        flash('username and email address have been updated','info')
+        return redirect(url_for('updateProfile'))
     return render_template('updateProfile.html', title='Update Profile', accountForm=accountForm, generalForm=generalForm)
 
 
@@ -270,3 +276,22 @@ def uploadAvatar():
     except Exception:
         return None,404
 
+
+
+
+
+@app.route('/updateGeneralInfo',methods=["POST"])
+@login_required
+def updateGeneralInfo():
+    if request.content_type == "application/json":
+        try:
+            generalData = request.get_json()
+            current_user.name = generalData.get('name')
+            current_user.shopname = generalData.get('shop')
+            current_user.location = generalData.get('location')
+            db.session.commit()
+            return {'message' : 'ok'},200
+        except ConnectionError as ConError:
+            raise ConError('Something went wrong while updating your details')
+    else:
+        raise TypeError('Provided data is not in json format')

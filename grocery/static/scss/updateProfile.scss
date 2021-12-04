@@ -16,6 +16,7 @@ Profile Update Page Styling
         font-weight:600;
         margin-bottom:2rem;
         text-shadow:0 0 3px rgba(0,0,0,.5);
+        letter-spacing:.75px;
     }
 
     > form {
@@ -44,8 +45,8 @@ Profile Update Page Styling
             font-size:.95rem;
             font-weight:600;
             line-height:1.2rem;
-            
         }
+
         input {
             font-family:var(--primary-font);
             font-size:.95rem;
@@ -125,13 +126,6 @@ Avatar related Form & its container styling
             border-radius:3px;
         }
     }
-
-    & > span {
-        font-size:.8rem;
-        color:var(--error-msg-color);
-        font-weight:600;
-        font-family:var(--tertiary-font);
-    }
 }
 
 
@@ -205,3 +199,13 @@ input[type="file"] {
 }
 
 
+/*************************
+Error message styling
+*************************/
+.error__msg {
+    font-size:.8rem;
+    color:var(--error-msg-color);
+    font-weight:600;
+    font-family:var(--tertiary-font);
+    display:block;
+}

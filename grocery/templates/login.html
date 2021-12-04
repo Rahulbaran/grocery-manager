@@ -19,24 +19,24 @@
             <div class="form__group">
                 {{form.emailOrUsername.label}}
                 {% if form.emailOrUsername.errors %}
-                    {{form.emailOrUsername(class="error__field")}}
-                    {% for error in form.emailOrUsername.errors %}
-                        <span class="field__error__msg">{{error}}</span>
-                    {% endfor %}
+                {{form.emailOrUsername(class="error__field")}}
+                {% for error in form.emailOrUsername.errors %}
+                <span class="field__error__msg">{{error}}</span>
+                {% endfor %}
                 {% else %}
-                    {{form.emailOrUsername(placeholder='enter either your email or username')}}
+                {{form.emailOrUsername(placeholder='enter either your email or username')}}
                 {% endif %}
             </div>
 
             <div class="form__group">
                 {{form.password.label}}
                 {% if form.password.errors %}
-                    {{form.password(class="error__field")}}
-                    {% for error in form.password.errors %}
-                        <span class="field__error__msg">{{error}}</span>
-                    {% endfor %}
+                {{form.password(class="error__field")}}
+                {% for error in form.password.errors %}
+                <span class="field__error__msg">{{error}}</span>
+                {% endfor %}
                 {% else %}
-                    {{form.password(placeholder='enter your password')}}
+                {{form.password(placeholder='enter your password')}}
                 {% endif %}
             </div>
 
