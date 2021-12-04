@@ -1,4 +1,4 @@
-import os,secrets
+import os, secrets, time
 from PIL import Image
 from flask import request, url_for, render_template, make_response, redirect, flash
 from flask_login import login_user, logout_user, current_user, login_required
@@ -13,13 +13,38 @@ from .models import User, Product, Order
 @app.route('/home')
 def home():
     if current_user.is_authenticated:
-        userOrders = Order.query.filter_by(user_id=current_user.id).all()
+        userOrders = Order.query.filter_by(user_id=current_user.id).order_by(Order.order_date.desc()).limit(20).all()
         total = 0
         for order in userOrders:
             total += order.total
         return render_template('home.html', title='Home', userOrders=userOrders, total=total)
     else :
         return render_template('home.html', title='Home')
+
+
+
+
+@app.route('/loadOrders')
+@login_required
+def loadOrders():
+    counter = request.args.get("c")
+    orders = Order.query.filter_by(user_id=current_user.id).order_by(Order.order_date.desc()).offset(counter).limit(20).all()
+    if len(orders):
+        loadOrders = []
+        totalPrice = 0
+        for order in orders:
+            loadOrder = {
+                'customer' : order.customer,
+                'date' : order.order_date.strftime('%d %b %Y'),
+                'total' : order.total
+            }
+            totalPrice += order.total
+            loadOrders.append(loadOrder)
+        time.sleep(1//2)
+        return {'orders': loadOrders, 'totalPrice' : totalPrice}
+    else:
+        return {'orders' : []}
+            
 
 
 

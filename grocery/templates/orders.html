@@ -1,130 +1,151 @@
-{% extends 'layout.html' %}
-{% block stylesheet %}
-    <link rel="stylesheet" href="{{url_for('static', filename='css/orders.css')}}">
-{% endblock stylesheet %}
+{% extends 'layout.html' %} {% block stylesheet %}
+<link
+    rel="stylesheet"
+    href="{{url_for('static', filename='css/orders.css')}}"
+/>
+{% endblock stylesheet %} {% block body %}
+<main class="new--orders--main--container">
+    <div class="new__orders__container">
+        <h1>Manage new orders</h1>
 
-{% block body %}
-    <main class="new--orders--main--container">
-
-        <div class="new__orders__container">
-
-            <h1>Manage new orders</h1>
-
-
-            <!-------------------- Form to add new orders ---------------------->
-            <form autocomplete="off" class="new__orders__form" spellcheck="false">
-
-
-                <!----------------- customer name input field ------------------>
-                <div class="customer__name__field">
-                    <label for="customerName">Customer Name</label>
-                    <input type="text" name="customer name" id="customerName" placeholder="enter customer name" required maxlength="200">
-                </div>
-
-                <!--------------- new order input fields container -------------->
-                <div class="new__orders__fields__container">
-                    <div class="new__order__fields">
-
-                        <label>
-                            <span>Product</span>
-                            <select required class="product__name" oninput="getProductName(this)">
-                                <option disabled="disabled" selected >Product name</option>
-                                {% for product in allProducts %}
-                                <option value="{{product.name}}">{{product.name}}</option>
-                                {% endfor %}
-                            </select>
-                        </label>
-
-                        <label>
-                            <span>Unit</span>
-                            <input type="text" name="Product Unit" class="product__unit" required placeholder="product unit" readonly="readonly">
-                        </label>
-
-                        <label>
-                            <span>Quantity</span>
-                            <input type="number" name="Product Quantity" class="product__quantity" required placeholder="total quantity" maxlength="5" onchange="calcTotalPrice(this)">
-                        </label>
-
-                        <label>
-                            <span>Total(Rs.)</span>
-                            <input type="number" name="Product Price" class="product__total__price" readonly="readonly" value="0">
-                        </label>
-
-                        <button type="button" class="new__order__remove__btn btn">Remove</button>
-
-                    </div>
-                </div>
-                
-                <!---------------------- Form Submit Button  ----------------------->
-                <button type="submit" class="orders__add__btn btn">
-                    <i class="fas fa-plus-circle"></i>
-                    Add All Orders
-                </button>
-
-            </form>
-
-
-            <!----------------------- Add More Orders Button ----------------------->
-            <button class="new__order__btn btn">
-                New Order
-            </button>
-
-
-            <!------------------------- New Orders Table --------------------------->
-            <div class="orders__table__wrapper">
-                <table class="orders__table">
-
-                    <thead>
-                        <tr>
-                            <th>SL No.</th>
-                            <th>Customer</th>
-                            <th>Order Id</th>
-                            <th>Product</th>
-                            <th>Quantity</th>
-                            <th>Total (Rs.)</th>
-                            <th>Date</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-
-                    <tbody>
-                        {% for ord in allOrders %}
-                        <tr id="order--{{ord.id}}">
-                            <td>{{loop.index}}</td>
-                            <td>{{ord.customer}}</td>
-                            <td>{{ord.id}}</td>
-                            <td>{{ord.product_name}}</td>
-                            <td>{{ord.quantity}} ({{ord.product_unit}})</td>
-                            <td>{{ord.total}}</td>
-                            <td>{{ord.order_date.strftime('%d %b %Y')}}</td>
-                            <td>
-                                <button class="order__remove__btn btn">Remove</button>
-                            </td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-
-                </table>
+        <!-------------------- Form to add new orders ---------------------->
+        <form autocomplete="off" class="new__orders__form" spellcheck="false">
+            <!----------------- customer name input field ------------------>
+            <div class="customer__name__field">
+                <label for="customerName">Customer Name</label>
+                <input
+                    type="text"
+                    name="customer name"
+                    id="customerName"
+                    placeholder="enter customer name"
+                    required
+                    maxlength="200"
+                />
             </div>
 
+            <!--------------- new order input fields container -------------->
+            <div class="new__orders__fields__container">
+                <div class="new__order__fields">
+                    <label>
+                        <span>Product</span>
+                        <select
+                            required
+                            class="product__name"
+                            oninput="getProductName(this)"
+                        >
+                            <option disabled="disabled" selected>
+                                Product name
+                            </option>
+                            {% for product in allProducts %}
+                            <option value="{{product.name}}">
+                                {{product.name}}
+                            </option>
+                            {% endfor %}
+                        </select>
+                    </label>
 
+                    <label>
+                        <span>Unit</span>
+                        <input
+                            type="text"
+                            name="Product Unit"
+                            class="product__unit"
+                            required
+                            placeholder="product unit"
+                            readonly="readonly"
+                        />
+                    </label>
+
+                    <label>
+                        <span>Quantity</span>
+                        <input
+                            type="number"
+                            name="Product Quantity"
+                            class="product__quantity"
+                            required
+                            placeholder="total quantity"
+                            maxlength="5"
+                            oninput="calcTotalPrice(this)"
+                        />
+                    </label>
+
+                    <label>
+                        <span>Total(Rs.)</span>
+                        <input
+                            type="number"
+                            name="Product Price"
+                            class="product__total__price"
+                            readonly="readonly"
+                            value="0"
+                        />
+                    </label>
+
+                    <button type="button" class="new__order__remove__btn btn">
+                        Remove
+                    </button>
+                </div>
+            </div>
+
+            <!---------------------- Form Submit Button  ----------------------->
+            <button type="submit" class="orders__add__btn btn">
+                <i class="fas fa-plus-circle"></i>
+                Add All Orders
+            </button>
+        </form>
+
+        <!----------------------- Add More Orders Button ----------------------->
+        <button class="new__order__btn btn">New Order</button>
+
+        <!------------------------- New Orders Table --------------------------->
+        <div class="orders__table__wrapper">
+            <table class="orders__table">
+                <thead>
+                    <tr>
+                        <th>SL No.</th>
+                        <th>Customer</th>
+                        <th>Product</th>
+                        <th>Quantity</th>
+                        <th>Total (Rs.)</th>
+                        <th>Date</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for ord in allOrders %}
+                    <tr id="order--{{ord.id}}">
+                        <td>{{loop.index}}</td>
+                        <td>{{ord.customer}}</td>
+                        <td>{{ord.product_name}}</td>
+                        <td>{{ord.quantity}} ({{ord.product_unit}})</td>
+                        <td>{{ord.total}}</td>
+                        <td>{{ord.order_date.strftime('%d %b %Y')}}</td>
+                        <td>
+                            <button class="order__remove__btn btn">
+                                Remove
+                            </button>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
         </div>
+    </div>
+</main>
+{% endblock body %} {% block script %}
+<script src="{{url_for('static',filename='minjs/orders.js')}}"></script>
 
-    </main>
-{% endblock body %}
+<script>
+    const newOrderBtn = document.querySelector(".new__order__btn");
+    const newOrdersContainer = document.querySelector(
+        ".new__orders__fields__container"
+    );
 
-{% block script %}
-    <script src="{{url_for('static',filename='js/orders.js')}}"></script>
-
-    <script>
-        const newOrderBtn = document.querySelector('.new__order__btn');
-        const newOrdersContainer = document.querySelector('.new__orders__fields__container')
-
-        //functionality to add new order input fields
-        newOrderBtn.addEventListener('click', () => {
-            const orderHtml = ` <div class="new__order__fields"><label><span>Product Name</span><select required class="product__name" oninput="getProductName(this)"><option disabled="disabled" selected>Product name</option>{% for product in allProducts %}<option value="{{product.name}}">{{product.name}}</option>{% endfor %}</select></label><label><span>Unit</span><input type="text" name="Product Unit" class="product__unit" required placeholder=" product unit" readonly="readonly">
-            </label><label><span>Quantity</span><input type="number" name="Product Quantity" class="product__quantity" required placeholder="total quantity" maxlength="10" onchange="calcTotalPrice(this)"></label><label><span>Total Price</span><input type="number" name="Product Price" class="product__total__price" readonly="readonly" value="0"></label><button type="button" class="new__order__remove__btn btn">Remove</button></div>`;
-            newOrdersContainer.insertAdjacentHTML('afterbegin',orderHtml);
-        });
-    </script>
+    //functionality to add new order input fields
+    newOrderBtn.addEventListener("click", () => {
+        const orderHtml = ` <div class="new__order__fields"><label><span>Product Name</span><select required class="product__name" oninput="getProductName(this)"><option disabled="disabled" selected>Product name</option>{% for product in allProducts %}<option value="{{product.name}}">{{product.name}}</option>{% endfor %}</select></label><label><span>Unit</span><input type="text" name="Product Unit" class="product__unit" required placeholder=" product unit" readonly="readonly">
+            </label><label><span>Quantity</span><input type="number" name="Product Quantity" class="product__quantity" required placeholder="total quantity" maxlength="10" oninput="calcTotalPrice(this)"></label><label><span>Total Price</span><input type="number" name="Product Price" class="product__total__price" readonly="readonly" value="0"></label><button type="button" class="new__order__remove__btn btn">Remove</button></div>`;
+        newOrdersContainer.insertAdjacentHTML("afterbegin", orderHtml);
+    });
+</script>
 {% endblock script %}

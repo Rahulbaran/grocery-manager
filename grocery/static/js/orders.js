@@ -9,7 +9,7 @@ const customerNameField = document.querySelector(
 );
 const tableBody = document.querySelector("tbody");
 
-/**************************
+/* *************************
  * event handler to remove newOrder fields
  * *********************** */
 newOrdersWrapper.addEventListener("click", function (e) {
@@ -19,7 +19,9 @@ newOrdersWrapper.addEventListener("click", function (e) {
     if (orderField) this.removeChild(e.target.parentNode);
 });
 
-// Function to make http request for getting unit of the selected product
+/* ********************************
+ *  Function to make http request for getting unit of the selected product (oninput event in html)
+ * ****************************** */
 const getProductName = function (prodInput) {
     const value = prodInput.value;
 
@@ -46,7 +48,9 @@ const getProductName = function (prodInput) {
     xhr.send(JSON.stringify({ name: value }));
 };
 
-//Function to make http request for calculating total price
+/* *****************************
+ * Function to make http request for calculating total price (oninput event in html)
+ * ************************** */
 const calcTotalPrice = prodInput => {
     const prodQuan = Number(prodInput.value);
     const prodName =
@@ -71,9 +75,9 @@ const calcTotalPrice = prodInput => {
     xhr.send(JSON.stringify(prodObj));
 };
 
-/*****************************
+/* ****************************
  * event handler for orders form submission
- * ************************** */
+ * *************************** */
 ordersForm.addEventListener("submit", e => {
     //1. Preventing form default submission behavior
     e.preventDefault();
@@ -101,7 +105,7 @@ ordersForm.addEventListener("submit", e => {
 
     //3. Removing orders input fields
     for (let index = 0; index < allOrders.length - 1; index++) {
-        newOrdersWrapper.removeChild(allOrders[index]);
+        newOrdersWrapper.removeChild(newOrdersWrapper.firstElementChild);
     }
 
     //4. making http request to send and recieve json data
@@ -130,7 +134,7 @@ ordersForm.addEventListener("submit", e => {
 
                 const orderHtml = `<tr id="order--${ord[0]}"><td>${
                     lastIndex + 1
-                }</td><td>${ord[1]}</td><td>${ord[0]}</td><td>${ord[2]}</td>
+                }</td><td>${ord[1]}</td><td>${ord[2]}</td>
             <td>${ord[3]} (${ord[4]})</td><td>${ord[5]}</td><td>${
                     ord[6]
                 }</td><td><button class="order__remove__btn btn">Remove</button></td></tr>`;
@@ -140,9 +144,9 @@ ordersForm.addEventListener("submit", e => {
         .catch(console.error);
 });
 
-/**************************
+/* **************************
  * event handler to delete orders from ui and database
- * *************************/
+ * ************************ */
 tableBody.addEventListener("click", function (e) {
     const orderRemoveBtn = e.target.classList.contains("order__remove__btn");
 

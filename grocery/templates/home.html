@@ -1,85 +1,89 @@
-{% extends 'layout.html' %}
-{% set active_page='home' %}
+{% extends 'layout.html' %} {% set active_page='home' %} {% block stylesheet %}
+<link rel="stylesheet" href="{{url_for('static',filename='css/home.css')}}" />
+{% endblock %} {% block body %} {% if current_user.is_authenticated %}
+<main class="home--logged--in--main">
+    <div class="grocery__management__container">
+        <h1>Grocery Management System</h1>
 
-{% block stylesheet %}
-<link rel="stylesheet" href="{{url_for('static',filename='css/home.css')}}">
-{% endblock %}
+        <h3>
+            Shopname -
+            <span
+                >{% if current_user.shopname %}{{current_user.shopname}}{% else
+                %}Not Available{% endif %}</span
+            >
+        </h3>
 
-{% block body %}
-
-{% if current_user.is_authenticated %}
-    <main class="home--logged--in--main">
-
-        <div class="grocery__management__container">
-            <h1>Grocery Management System</h1>
-
-            <h3>Shopname - 
-                <span>{% if current_user.shopname %}{{current_user.shopname}}{% else %}Not Available{% endif %}</span>
-            </h3>
-
-            <div class="grocery__links__container">
-                <a href="{{url_for('products')}}" class="manage__products__link" title='manage grocery products'>Manage Products</a>
-                <a href="{{url_for('orders')}}" class="new__order__link" title='manage new orders'>Manage Orders</a>
-            </div>
-
-            <!-------------- Table to show the items ordered by customers --------------->
-            <div class="order__table__container">
-                <table class="order__table">
-                    <thead>
-                        <tr>
-                            <th>SL No.</th>
-                            <th>Customer Name</th>
-                            <th>Order No.</th>
-                            <th>Order Date</th>
-                            <th>Total Cost (Rs)</th>
-                        </tr>
-                        
-                    </thead>
-
-                    <tbody>
-                        {% for ord in userOrders %}
-                        <tr>
-                            <td>{{loop.index}}</td>
-                            <td>{{ord.customer}}</td>
-                            <td>{{ord.id}}</td>
-                            <td>{{ord.order_date.strftime('%d %b %Y')}}</td>
-                            <td>{{ord.total}}</td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-
-                    <tfoot>
-                        <tr>
-                            <td colspan="5">Total - {{total}}/-</td>
-                        </tr>
-                    </tfoot>
-                </table>
-            </div>
-
+        <div class="grocery__links__container">
+            <a
+                href="{{url_for('products')}}"
+                class="manage__products__link"
+                title="manage grocery products"
+                >Manage Products</a
+            >
+            <a
+                href="{{url_for('orders')}}"
+                class="new__order__link"
+                title="manage new orders"
+                >Manage Orders</a
+            >
         </div>
 
-    </main>
+        <!-------------- Table to show the items ordered by customers --------------->
+        <div class="order__table__container">
+            <table class="order__table">
+                <thead>
+                    <tr>
+                        <th>SL No.</th>
+                        <th>Customer Name</th>
+                        <th>Order Date</th>
+                        <th>Total Cost (Rs)</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for ord in userOrders %}
+                    <tr>
+                        <td>{{loop.index}}</td>
+                        <td>{{ord.customer}}</td>
+                        <td>{{ord.order_date.strftime('%d %b %Y')}}</td>
+                        <td>{{ord.total}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+
+                <tfoot>
+                    <tr>
+                        <td colspan="5">Total - <span>{{total}}</span>/-</td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+
+    <!--------------------------- Loading Spinner ------------------------------>
+    <div class="loading__spinner__container">
+        <div class="loading__spinner"></div>
+    </div>
+</main>
 
 {% else %}
-    <main class="home--logged--out--main">
+<main class="home--logged--out--main">
+    <div class="home__content__container">
+        <h1>Grocery Manager</h1>
+        <p>Make your grocery business painless</p>
+        <a href="{{url_for('login')}}" class="get__started__link">
+            <span>Start now</span>
+            <i class="fas fa-arrow-circle-right"></i>
+        </a>
+    </div>
 
-        <div class="home__content__container">
-            <h1>Grocery Manager</h1>
-            <p>Make your grocery business painless</p>
-            <a href="{{url_for('login')}}" class="get__started__link">
-                <span>Start now</span>
-                <i class="fas fa-arrow-circle-right"></i>
-            </a>
-        </div>
-
-        <div class="home__svg__container">
-            <img src="{{url_for('static', filename='site-images/home-svg.svg')}}" alt="Homepage SVG">
-        </div>
-
-    </main>
-{% endif %}
-    
-{% endblock body %}
-
-{% block script %}
+    <div class="home__svg__container">
+        <img
+            src="{{url_for('static', filename='site-images/home-svg.svg')}}"
+            alt="Homepage SVG"
+        />
+    </div>
+</main>
+{% endif %} {% endblock body %} {% block script %}
+<script src="{{url_for('static',filename='minjs/home.js')}}"></script>
 {% endblock %}
