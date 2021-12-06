@@ -1,164 +1,158 @@
 //login page styling
 .login {
     &--main {
-        display:grid;
-        grid-template-columns:1fr;
-        grid-gap:40px;
-        justify-items:flex-start;
-        align-items:center;
-        padding:3rem .8rem;
-        background-color:rgb(255, 252, 246);
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-gap: 40px;
+        justify-items: flex-start;
+        align-items: center;
+        padding: 3rem 0.8rem;
+        background-color: rgb(255, 252, 246);
     }
 
     &__svg__container {
-        display:none;
-        
+        display: none;
+
         img {
-            height:28rem;
-            display:block;
+            height: 28rem;
+            display: block;
         }
     }
-    
+
     &__form__container {
-        width:100%;
-        margin:0 auto;
-        padding:1.5rem 1rem;
-        border-radius:3px;
-        box-shadow:0 0 2px rgba(0,0,0,.3);
-        background-color:var(--color-white);
+        width: 100%;
+        margin: 0 auto;
+        padding: 1.5rem 1rem;
+        border-radius: 3px;
+        box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
+        background-color: var(--color-white);
     }
 
     &__form {
-        width:100%;
-        display:grid;
-        grid-template-columns:1fr;
-        grid-gap:.3rem;
-        font-family:var(--primary-font);
-        color:var(--input-label-color);
+        width: 100%;
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-gap: 0.3rem;
+        font-family: var(--primary-font);
+        color: var(--input-label-color);
 
         legend {
-            line-height:1rem;
-            font-size:1.3rem;
-            font-weight:600;
-            font-family:var(--tertiary-font);
-            color:var(--legend-color);
-            margin-bottom:.75rem;
-            text-decoration:2px underline currentColor;
-            text-underline-offset:2px;
+            line-height: 1rem;
+            font-size: 1.3rem;
+            font-weight: 600;
+            font-family: var(--tertiary-font);
+            color: var(--legend-color);
+            margin-bottom: 0.75rem;
+            text-decoration: 2px underline currentColor;
+            text-underline-offset: 2px;
         }
     }
 }
 
 .form {
     &__group {
-        display:flex;
-        justify-content:center;
-        align-items:flex-start;
-        flex-direction:column;
-        
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        flex-direction: column;
+
         label {
-            font-size:.95rem;
-            font-weight:600;
-            line-height:1.2rem;  
+            font-size: 0.95rem;
+            font-weight: 600;
+            line-height: 1.2rem;
         }
         input {
-            font-family:var(--primary-font);
-            font-size:.95rem;
-            width:100%;
-            padding:.45rem .5rem;
-            border:1px solid var(--input-field-border);
-            border-radius:2px;
-            outline:none;
-            border-radius:3px;
+            font-family: var(--primary-font);
+            font-size: 0.95rem;
+            width: 100%;
+            padding: 0.45rem 0.5rem;
+            border: 1px solid var(--input-field-border);
+            border-radius: 2px;
+            outline: none;
+            border-radius: 3px;
 
             &:focus {
-                outline:1px solid var(--color-black);
+                outline: 1px solid var(--color-black);
             }
         }
     }
-    
+
     &__remember__group {
         label {
-            font-size:.95rem;
-            font-weight:600;
-            line-height:1.2rem;
-            margin-left:.5rem;
+            font-size: 0.95rem;
+            font-weight: 600;
+            line-height: 1.2rem;
+            margin-left: 0.5rem;
         }
     }
 
     &__submit__group {
         input {
-            padding:.75rem 1.5rem;
+            padding: 0.75rem 1.5rem;
         }
     }
 }
-
 
 /************************
 password forgot link and register now link
 *************************/
 .forgot__password__link,
 .register__now__link {
-    text-decoration:none;
-    color:var(--form-link-color);
-    display:inline-block;
-    font-size:.9rem;
-    font-family:var(--tertiary-font);
+    text-decoration: none;
+    color: var(--form-link-color);
+    display: inline-block;
+    font-size: 0.9rem;
+    font-family: var(--tertiary-font);
 
     &:hover,
     &:focus {
-        text-decoration:1px underline currentColor;
-        text-underline-offset:2px;
+        text-decoration: 1px underline currentColor;
+        text-underline-offset: 2px;
     }
 }
 .forgot__password__link {
-    margin-top:.25rem;
-    font-weight:500;
+    margin-top: 0.25rem;
+    font-weight: 500;
 }
 .registration__page__link__container {
-    font-weight:500;
-    font-size:.9rem;
+    font-weight: 500;
+    font-size: 0.9rem;
 }
-
-
-
-
-
 
 /************************
 media queries
 *************************/
-@media screen and (min-width:481px){    
+@media screen and (min-width: 481px) {
     .login {
         &__form__container {
-            width:90%;
-            padding:1.5rem;
+            width: 90%;
+            padding: 1.5rem;
         }
     }
 }
 
-@media screen and (min-width:760px) {
+@media screen and (min-width: 760px) {
     .login {
         &__form__container {
-            width:80%;
+            width: 80%;
         }
-        
+
         &--main {
-            padding:3rem;
+            padding: 3rem;
         }
     }
 }
 
-@media screen and (min-width:992px) {
+@media screen and (min-width: 992px) {
     .login {
         &--main {
-            grid-template-columns:repeat(2,1fr);
+            grid-template-columns: repeat(2, 1fr);
         }
         &__form__container {
-            width:100%;
+            width: 100%;
         }
         &__svg__container {
-            display:block;
+            display: block;
         }
     }
 }

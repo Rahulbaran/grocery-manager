@@ -1,75 +1,75 @@
-{% extends 'layout.html' %}
-{% set active_page='login' %}
-
+{% extends 'layout.html' %} 
+{% set active_page='login' %} 
 {% block stylesheet %}
-<link rel="stylesheet" href="{{url_for('static',filename='css/login.css')}}">
-{% endblock %}
-
+<link rel="stylesheet" href="{{url_for('static',filename='css/login.css')}}" />
+{% endblock %} 
 {% block body %}
 <main class="login--main">
-
-   <div class="login__form__container">
-
+    <div class="login__form__container">
         <!-------------------------- login form----------------------->
-        <form  class="login__form" autocomplete="off" method="post">
-
+        <form class="login__form" autocomplete="off" method="post">
             {{form.hidden_tag()}}
             <legend>Login here</legend>
 
             <div class="form__group">
                 {{form.emailOrUsername.label}}
-                {% if form.emailOrUsername.errors %}
-                {{form.emailOrUsername(class="error__field")}}
+                {% if form.emailOrUsername.errors%} 
+                {{form.emailOrUsername(class="error__field")}} 
                 {% for error in form.emailOrUsername.errors %}
                 <span class="field__error__msg">{{error}}</span>
-                {% endfor %}
-                {% else %}
-                {{form.emailOrUsername(placeholder='enter either your email or username')}}
+                {% endfor %} 
+                {% else %} 
+                {{form.emailOrUsername(placeholder='enter either your email or username')}} 
                 {% endif %}
             </div>
 
             <div class="form__group">
-                {{form.password.label}}
+                {{form.password.label}} 
                 {% if form.password.errors %}
-                {{form.password(class="error__field")}}
+                {{form.password(class="error__field")}} 
                 {% for error in form.password.errors %}
                 <span class="field__error__msg">{{error}}</span>
-                {% endfor %}
-                {% else %}
-                {{form.password(placeholder='enter your password')}}
+                {% endfor %} 
+                {% else %} 
+                {{form.password(placeholder='enter your password')}} 
                 {% endif %}
             </div>
 
             <div class="form__remember__group">
-                {{form.remember_me}}
+                {{form.remember_me}} 
                 {{form.remember_me.label}}
             </div>
 
-            <div class="form__submit__group">
-                {{form.submit(class="btn")}}
-            </div>
+            <div class="form__submit__group">{{form.submit(class="btn")}}</div>
         </form>
-        
 
         <!------------------ forgot password page link ------------------>
-        <a href="#" class="forgot__password__link">Forgot password ?</a>
-
+        <a
+            href="{{url_for('passwordResetRequest')}}"
+            class="forgot__password__link"
+            >Forgot password ?</a
+        >
 
         <!-------------------- registration page  link ------------------->
         <div class="registration__page__link__container">
-            <p>New user 
-                <a href="{{url_for('register')}}" class="register__now__link" title='If you are a new user register now'>register now</a>
+            <p>
+                New user
+                <a
+                    href="{{url_for('register')}}"
+                    class="register__now__link"
+                    title="If you are a new user register now"
+                    >register now</a
+                >
             </p>
         </div>
-
-   </div>
-    
+    </div>
 
     <!---------------- login page svg container  ---------------->
     <div class="login__svg__container">
-        <img src="{{url_for('static',filename='site-images/login-svg.svg')}}" alt="user login svg image">
+        <img
+            src="{{url_for('static',filename='site-images/login-svg.svg')}}"
+            alt="user login svg image"
+        />
     </div>
-
 </main>
 {% endblock %}
-

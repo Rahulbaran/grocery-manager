@@ -23,36 +23,36 @@
         <div class="form__group">
             {{form.name.label}}
             {% if form.name.errors %}
-                {{form.name(class="error__field")}}
-                {% for error in form.name.errors %}
-                    <span class="field__error__msg">{{error}}</span>
-                {% endfor %}
+            {{form.name(class="error__field")}}
+            {% for error in form.name.errors %}
+            <span class="field__error__msg">{{error}}</span>
+            {% endfor %}
             {% else %}
-                {{form.name(placeholder='enter your fullname')}}
+            {{form.name(placeholder='enter your fullname')}}
             {% endif %}
         </div>
 
         <div class="form__group">
             {{form.username.label}}
             {% if form.username.errors %}
-                {{form.username(class="error__field")}}
-                {% for error in form.username.errors %}
-                    <span class="field__error__msg">{{error}}</span>
-                {% endfor %}
+            {{form.username(class="error__field")}}
+            {% for error in form.username.errors %}
+            <span class="field__error__msg">{{error}}</span>
+            {% endfor %}
             {% else %}
-                {{form.username(placeholder='enter an username')}}
+            {{form.username(placeholder='enter an username')}}
             {% endif %}
         </div>
 
         <div class="form__group">
             {{form.email.label}}
             {% if form.email.errors %}
-                {{form.email(class="error__field")}}
-                {% for error in form.email.errors %}
-                    <span class="field__error__msg">{{error}}</span>
-                {% endfor %}
+            {{form.email(class="error__field")}}
+            {% for error in form.email.errors %}
+            <span class="field__error__msg">{{error}}</span>
+            {% endfor %}
             {% else %}
-                {{form.email(placeholder='enter your email address')}}
+            {{form.email(placeholder='enter your email address')}}
             {% endif %}
         </div>
 
@@ -66,15 +66,15 @@
                 </button>
             </div>
             {% for error in form.password.errors %}
-                <span class="field__error__msg">{{error}}</span>
+            <span class="field__error__msg">{{error}}</span>
             {% endfor %}
             {% else %}
-                <div class="password__input__field">
-                    {{form.password(placeholder='enter a password')}}
-                    <button class="password__toggle__btn" type="button">
-                        <i class="fas fa-eye"></i>
-                    </button>
-                </div>
+            <div class="password__input__field">
+                {{form.password(placeholder='enter a password')}}
+                <button class="password__toggle__btn" type="button">
+                    <i class="fas fa-eye"></i>
+                </button>
+            </div>
             {% endif %}
                 
             
@@ -83,12 +83,12 @@
         <div class="form__group">
             {{form.reenter_password.label}}
             {% if form.reenter_password.errors %}
-                {{form.reenter_password(class="error__field")}}
-                {% for error in form.reenter_password.errors %}
-                    <span class="field__error__msg">{{error}}</span>
-                {% endfor %}
+            {{form.reenter_password(class="error__field")}}
+            {% for error in form.reenter_password.errors %}
+            <span class="field__error__msg">{{error}}</span>
+            {% endfor %}
             {% else %}
-                {{form.reenter_password(placeholder='reenter the same password')}}
+            {{form.reenter_password(placeholder='reenter the same password')}}
             {% endif %}
         </div>
 

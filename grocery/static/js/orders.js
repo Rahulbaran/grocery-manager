@@ -84,6 +84,7 @@ ordersForm.addEventListener("submit", e => {
 
     //2. storing order details in a suitable data structure and empting the input fields
     const allOrders = newOrdersWrapper.children;
+    const totalOrderFields = allOrders.length;
     const ordersData = [];
 
     for (let i = 0; i < allOrders.length; i++) {
@@ -104,7 +105,7 @@ ordersForm.addEventListener("submit", e => {
     customerNameField.value = "";
 
     //3. Removing orders input fields
-    for (let index = 0; index < allOrders.length - 1; index++) {
+    for (let index = 0; index < totalOrderFields - 1; index++) {
         newOrdersWrapper.removeChild(newOrdersWrapper.firstElementChild);
     }
 

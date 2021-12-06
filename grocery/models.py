@@ -1,5 +1,7 @@
 from datetime import datetime
-from . import db, login_manager
+from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
+from flask_admin.contrib.sqla import ModelView
+from . import db, login_manager, app, admin
 
 
 
@@ -22,6 +24,22 @@ class User(db.Model):
     location = db.Column(db.String(100))
     product = db.relationship('Product', backref="product_user", lazy='dynamic')
     order = db.relationship('Order', backref='order_user', lazy='dynamic')
+
+    # Method to generate reset token
+    def generate_token(self,expire_sec=600):
+        s = Serializer(app.config['SECRET_KEY'], expire_sec)
+        return s.dumps({'user_id' : self.id}).decode('utf-8')
+
+    # Method to verify the token
+    @staticmethod
+    def verify_reset_token(token):
+        s = Serializer(app.config['SECRET_KEY'])
+        try:
+            user_id = s.loads(token)['user_id']
+        except:
+            return None
+        return User.query.get(user_id)
+
 
     # Methods to use flask_login package
     def is_active(self):
@@ -49,9 +67,6 @@ class Product(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
 
 
-    def __repr__(self):
-        return f'Product({self.name} {self.unit} {self.price} {self.user_id})'
-
 
 
 
@@ -67,5 +82,45 @@ class Order(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 
 
-    def __repr__(self):
-        return f'Order({self.customer},{self.product_name}, {self.total})'
+
+
+
+
+
+# User View
+class UserView (ModelView):
+    page_size = 30
+    can_delete = False
+    can_edit = False
+    can_create = False
+    column_exclude_list = ['password', 'Avatar']
+    column_serachable_list = ['name', 'username', 'email']
+    column_filters = ['name', 'shopname', 'location']
+
+# Product View
+class ProductView (ModelView):
+    can_delete = False
+    can_edit = False
+    can_create = False
+    page_size = 30
+    column_searchable_list = ['name','unit','price']
+    column_filters = ['unit']
+
+# Order View
+class OrderView (ModelView):
+    can_delete = False
+    can_edit = False
+    can_create = False
+    column_searchable_list = ['customer', 'order_date']
+    page_size = 40
+    column_filters = ['customer', 'order_date']
+
+admin.add_view(UserView(User,db.session))
+admin.add_view(ProductView(Product,db.session))
+admin.add_view(OrderView(Order,db.session))
+
+
+
+
+
+

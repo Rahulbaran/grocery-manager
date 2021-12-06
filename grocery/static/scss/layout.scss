@@ -134,7 +134,9 @@ body {
 
 
 
-//input fields error messages styling
+/* ************************
+Input field error messages styling
+************************* */
 .error__field {
     border-color:rgb(228, 25, 25) !important;
 }
@@ -149,7 +151,9 @@ body {
 
 
 
-//styling for message flashing container
+/* ************************
+styling for message flashing container
+************************* */
 @mixin msgContainer ($bg,$color) {
     background-color:$bg;
     span { color:$color; }

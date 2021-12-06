@@ -1,0 +1,40 @@
+{% extends 'layout.html' %}
+{% block stylesheet %}
+<link rel="stylesheet" href="{{url_for('static',filename='css/admin_login.css')}}">
+{% endblock %}
+
+{% block body %}
+<main class="admin--login--section">
+    <form method="post" autocomplete="off">
+        {{form.hidden_tag()}}
+
+        <legend>Admin Login Form</legend>
+
+        <div class="form__group">
+            {{form.username.label}}
+            {% if form.username.errors %}
+            {{form.username(class="error__field")}}
+            {% for error in form.username.errors %}
+            <span class="field__error__msg">{{error}}</span>
+            {% endfor %}
+            {% else %} 
+            {{form.username(placeholder='enter admin username')}}
+            {% endif %}
+        </div>
+
+        <div class="form__group">
+            {{form.password.label}}
+            {% if form.password.errors %}
+            {{form.password(class="error__field")}}
+            {% for error in form.password.errors %}
+            <span class="field__error__msg">{{error}}</span>
+            {% endfor %}
+            {% else %} 
+            {{form.password(placeholder='enter admin password')}}
+            {% endif %}
+        </div>
+
+        <div class="form__submit__group">{{form.submit(class="btn")}}</div>
+    </form>
+</main>
+{% endblock %}

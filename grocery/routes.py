@@ -1,9 +1,10 @@
 import os, secrets, time
 from PIL import Image
-from flask import request, url_for, render_template, make_response, redirect, flash
+from flask import request, url_for, render_template, make_response, redirect, flash, session
 from flask_login import login_user, logout_user, current_user, login_required
-from . import app, bcrypt, db
-from .form import RegistrationForm, LoginForm, UpdateAccountForm, UpdateGeneralDetailsForm
+from . import app, bcrypt, db, mail
+from .form import RegistrationForm, LoginForm, UpdateAccountForm, UpdateGeneralDetailsForm, \
+                  PasswordResetForm, PasswordResetRequestForm, AdminLoginForm
 from .models import User, Product, Order
 
 
@@ -20,6 +21,7 @@ def home():
         return render_template('home.html', title='Home', userOrders=userOrders, total=total)
     else :
         return render_template('home.html', title='Home')
+
 
 
 
@@ -55,6 +57,7 @@ def contactUs():
     res = make_response(render_template('contact.html', title='Contact Us'),headers)
     res.set_cookie('theme', 'red', max_age=1000, path="/contactUs")
     return res
+
 
 
 
@@ -108,12 +111,81 @@ def login():
 
 
 
+# Function to send email for resetting password
+def send_reset_email(user):
+    token = user.generate_token()
+    print(token)
+
+@app.route('/passwordResetRequest',methods=["GET","POST"])
+def passwordResetRequest():
+    if current_user.is_authenticated:
+        flash('Please logout to reset your password', 'info')
+        return redirect(url_for('home'))
+    form = PasswordResetRequestForm()
+    if form.validate_on_submit():
+        user  = User.query.filter_by(email=form.email.data).first()
+        if user:
+            send_reset_email(user)
+            flash('An mail has been sent to reset the password','info')
+        else:
+            flash('Email address does not exist','info')
+        return redirect(url_for('home'))
+    return render_template('passwordResetRequest.html', title='Password Reset Request', form=form)
+
+
+
+
+
+@app.route('/passwordReset',methods=["GET","POST"])
+def passwordReset():
+    if current_user.is_authenticated:
+        flash('Please logout to reset your password', 'info')
+        return redirect(url_for('home'))
+    form = PasswordResetForm()
+    return render_template('passwordReset.html',title='Reset Password', form=form)
+
+
+
+
+
 @app.route('/logout')
 @login_required
 def logout():
     logout_user()
     flash('You have logged out from the site', 'info')
     return redirect(url_for('home'))
+
+
+
+
+
+@app.route('/admin_login', methods=["GET","POST"])
+def admin_login():
+    form = AdminLoginForm()
+    if form.validate_on_submit():
+        admin_username,admin_password = form.username.data, form.password.data
+        if admin_username == os.environ.get('ADMIN_USERNAME') and \
+        admin_password == os.environ.get("ADMIN_PASSWORD"):
+            session["admin_logged_in"] = True
+            flash('Welcome admin, you have logged in', 'info')
+            return redirect('/admin')
+        else :
+            flash('Either username or password is wrong', 'error')
+    return render_template('admin_login.html', title='Admin Login Page', form = form)
+    
+
+
+
+
+@app.route('/admin_logout')
+def admin_logout():
+    if "admin_logged_in" in session:
+        session.clear()
+        flash('You have logged out from the admin page','info')
+        return redirect(url_for('home'))
+    else :
+        flash('Please login to get logged out from admin page', 'info')
+        return redirect(url_for('admin_login'))
 
 
 

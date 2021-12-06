@@ -56,6 +56,41 @@ class LoginForm(FlaskForm):
 
 
 
+#Admin Login Form
+class AdminLoginForm(FlaskForm):
+    username = StringField('Admin Username', validators=[InputRequired()])
+    password = PasswordField('Password', validators=[Length(min=8, max=100), InputRequired()])
+    submit = SubmitField('Admin Login')
+
+
+
+
+# Form to make request for password Update
+class PasswordResetRequestForm(FlaskForm):
+    email = EmailField('Email Address', validators=[InputRequired(), Length(min=10, max=200, message='email must be at max 200 characters long')])
+    submit = SubmitField('Request Password Reset')
+
+
+
+
+
+# Form to reset password
+class PasswordResetForm(FlaskForm):
+    password = PasswordField('Password', validators=[Length(min=8, max=100, message='password should be 8 to 100 characters long'), InputRequired()])
+    reenter_password = PasswordField('Re-enter Password', validators=[EqualTo('password', message='should match with password')])
+    submit = SubmitField('Reset Password')
+
+    def validate_password(self,password):
+        specialChar = '!@#$%^&*()_+-=|\}]{[:;?/>.<,~`\'\"'
+        totalSpecialChar = 0
+        for char in password.data:
+            if char in specialChar:
+                totalSpecialChar += 1
+        if totalSpecialChar == 0:
+            raise ValidationError('password should have atleast one special character')
+
+
+
 
 # Update General Details Form
 class UpdateGeneralDetailsForm(FlaskForm):
