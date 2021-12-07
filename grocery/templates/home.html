@@ -15,13 +15,13 @@
 
         <div class="grocery__links__container">
             <a
-                href="{{url_for('products')}}"
+                href="{{url_for('productOrders.products')}}"
                 class="manage__products__link"
                 title="manage grocery products"
                 >Manage Products</a
             >
             <a
-                href="{{url_for('orders')}}"
+                href="{{url_for('productOrders.orders')}}"
                 class="new__order__link"
                 title="manage new orders"
                 >Manage Orders</a
@@ -71,7 +71,7 @@
     <div class="home__content__container">
         <h1>Grocery Manager</h1>
         <p>Make your grocery business painless</p>
-        <a href="{{url_for('login')}}" class="get__started__link">
+        <a href="{{url_for('userbp.login')}}" class="get__started__link">
             <span>Start now</span>
             <i class="fas fa-arrow-circle-right"></i>
         </a>

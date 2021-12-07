@@ -1,7 +1,7 @@
 from datetime import datetime
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 from flask_admin.contrib.sqla import ModelView
-from . import db, login_manager, app, admin
+from grocery import db, login_manager, app, admin
 
 
 

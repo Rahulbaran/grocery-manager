@@ -5,7 +5,7 @@ from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
 from flask_mail import Mail
 from flask_admin import Admin, AdminIndexView
-from .config import DevConfig, ProdConfig, TestConfig
+from grocery.config import DevConfig, ProdConfig, TestConfig
 
 
 
@@ -21,7 +21,7 @@ elif mode == "testing":
 bcrypt = Bcrypt(app)
 db = SQLAlchemy(app)
 login_manager = LoginManager(app)
-login_manager.login_view='login'
+login_manager.login_view='userbp.login'
 login_manager.login_message = 'Please login to get the requested page'
 login_manager.login_message_category = 'info'
 mail = Mail(app)
@@ -32,16 +32,24 @@ class AdminPageView(AdminIndexView):
     def is_accessible(self):
         if 'admin_logged_in' in session:
             return True
-
     def inaccessible_callback(self, name, **kwargs):
         return redirect(url_for('admin_login'))
-
 admin = Admin(app, template_mode='bootstrap4', name='Admin Section', index_view=AdminPageView())
 
 
 
+from grocery.userbp.routes import userbp
+from grocery.main.routes import main
+from grocery.error.handlers import handlers
+from grocery.productOrders.routes import productOrders
 
-from . import routes
+app.register_blueprint(userbp)
+app.register_blueprint(main)
+app.register_blueprint(handlers)
+app.register_blueprint(productOrders)
+
+
+
 
 
 
