@@ -71,4 +71,4 @@ const loadOrders = entries => {
 
 //Intersection Observer to observer intersection of spinner with viewport
 const observer = new IntersectionObserver(loadOrders);
-observer.observe(loadingSpinner);
+if (loadingSpinner) observer.observe(loadingSpinner);

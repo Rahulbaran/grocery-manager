@@ -1,0 +1,57 @@
+{
+    "name": "Grocery Manager",
+    "short_name": "grocery",
+    "background_color": "hsl(260,100%,80%)",
+    "theme_color": "hsl(250,100%,80%)",
+    "description": "A grocery Management Application",
+    "display": "standalone",
+    "categories": ["Grocery Manager", "Grocery Management", "Manage Grocery"],
+    "language": "en-US",
+    "orientation": "portrait-primary",
+    "start_url": "/",
+    "scope": "/",
+    "icons": [
+        {
+            "src": "./site-images/icons/grocery-24.png",
+            "sizes": "24x24",
+            "type": "image/png"
+        },
+        {
+            "src": "./site-images/icons/grocery-32.png",
+            "sizes": "32x32",
+            "type": "image/png"
+        },
+        {
+            "src": "./site-images/icons/grocery-mask-48.png",
+            "sizes": "48x48",
+            "type": "image/png",
+            "purpose": "maskable"
+        },
+        {
+            "src": "./site-images/icons/grocery-64.png",
+            "sizes": "64x64",
+            "type": "image/png"
+        },
+        {
+            "src": "./site-images/icons/grocery-128.png",
+            "sizes": "128x128",
+            "type": "image/png"
+        },
+        {
+            "src": "./site-images/icons/grocery-mask-128.png",
+            "sizes": "128x128",
+            "type": "image/png",
+            "purpose": "maskable"
+        },
+        {
+            "src": "./site-images/icons/grocery-256.png",
+            "sizes": "256x256",
+            "type": "image/png"
+        },
+        {
+            "src": "./site-images/icons/grocery-512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ]
+}

@@ -1,6 +1,10 @@
-{% extends 'layout.html' %} {% set active_page='home' %} {% block stylesheet %}
+{% extends 'layout.html' %} 
+{% set active_page='home' %} 
+{% block stylesheet %}
 <link rel="stylesheet" href="{{url_for('static',filename='css/home.css')}}" />
-{% endblock %} {% block body %} {% if current_user.is_authenticated %}
+{% endblock %} 
+{% block body %} 
+{% if current_user.is_authenticated %}
 <main class="home--logged--in--main">
     <div class="grocery__management__container">
         <h1>Grocery Management System</h1>
@@ -61,9 +65,11 @@
     </div>
 
     <!--------------------------- Loading Spinner ------------------------------>
+    {% if userOrders %}
     <div class="loading__spinner__container">
         <div class="loading__spinner"></div>
     </div>
+    {% endif %}
 </main>
 
 {% else %}
@@ -84,6 +90,8 @@
         />
     </div>
 </main>
-{% endif %} {% endblock body %} {% block script %}
+{% endif %} 
+{% endblock body %} 
+{% block script %}
 <script src="{{url_for('static',filename='minjs/home.js')}}"></script>
 {% endblock %}
