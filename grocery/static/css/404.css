@@ -1,0 +1,2 @@
+.main--404--container{grid-gap:10px 0;display:grid;grid-template-columns:1fr;margin:2em auto;max-width:95%;text-align:center;width:760px}.main--404--container h1{color:var(--h1-color);font-family:var(--secondary-font);font-size:2rem;font-weight:500;margin-top:1rem;text-shadow:0 0 2px rgba(0,0,0,.25);text-transform:uppercase}.main--404--container p{color:#555}img{display:block;margin:0 auto;width:90%}@media screen and (max-width:480px){img{width:95%}}
+/*# sourceMappingURL=404.css.map */

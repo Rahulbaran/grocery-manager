@@ -74,7 +74,7 @@ def passwordResetRequest():
         user  = User.query.filter_by(email=form.email.data).first()
         if user:
             send_reset_email(user)
-            flash('An mail has been sent to reset the password','info')
+            flash('An mail has been sent to reset password','info')
         else:
             flash('Email address does not exist','info')
         return redirect(url_for('main.home'))
@@ -98,7 +98,7 @@ def passwordReset(token):
         hash_pw = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
         user.password = hash_pw
         db.session.commit()
-        flash('Your password has been updated now you can login','info')
+        flash('Your password has been updated','info')
         return redirect(url_for('userbp.login'))
     return render_template('passwordReset.html',title='Reset Password', form=form)
 
@@ -142,7 +142,7 @@ def admin_logout():
         flash('You have logged out from the admin page','info')
         return redirect(url_for('main.home'))
     else :
-        flash('Please login to get logged out from admin page', 'warning')
+        flash('Please login before getting logged out', 'warning')
         return redirect(url_for('userbp.admin_login'))
 
 
@@ -164,7 +164,7 @@ def updateProfile():
         current_user.username = accountForm.username.data
         current_user.email = accountForm.email.data
         db.session.commit()
-        flash('username and email address have been updated','info')
+        flash('Username & Email have been updated','info')
         return redirect(url_for('userbp.updateProfile'))
     return render_template('updateProfile.html', title='Update Profile', accountForm=accountForm, generalForm=generalForm)
 

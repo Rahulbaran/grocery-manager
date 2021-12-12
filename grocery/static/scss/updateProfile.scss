@@ -3,12 +3,12 @@ Profile Update Page Styling
 *************************/
 .profile--update--section {
     background-image: linear-gradient(
-        to top left,
+        to right,
         #a34be7,
         #a745e8,
         #ac3ee8,
-        #9a17d6,
-        #a910d8,
+        #b036e9,
+        #b52ce9,
         #b32dea,
         #b22eec,
         #b02fed,
@@ -18,6 +18,7 @@ Profile Update Page Styling
         #8a50f6
     );
     background-repeat: no-repeat;
+    background-attachment: fixed;
     padding: 2rem 0;
     display: flex;
     justify-content: center;

@@ -1,12 +1,14 @@
-{% extends 'layout.html' %} {% block stylesheet %}
+{% extends 'layout.html' %} 
+{% block stylesheet %}
 <link
     rel="stylesheet"
     href="{{url_for('static', filename='css/orders.css')}}"
 />
-{% endblock stylesheet %} {% block body %}
+{% endblock %} 
+{% block body %}
 <main class="new--orders--main--container">
     <div class="new__orders__container">
-        <h1>Manage new orders</h1>
+        <h1>Manage Orders</h1>
 
         <!-------------------- Form to add new orders ---------------------->
         <form autocomplete="off" class="new__orders__form" spellcheck="false">
@@ -70,7 +72,7 @@
                     </label>
 
                     <label>
-                        <span>Total(Rs.)</span>
+                        <span>Total (Rs.)</span>
                         <input
                             type="number"
                             name="Product Price"
@@ -132,7 +134,8 @@
         </div>
     </div>
 </main>
-{% endblock body %} {% block script %}
+{% endblock body %} 
+{% block script %}
 <script src="{{url_for('static',filename='minjs/orders.js')}}"></script>
 
 <script>
@@ -144,7 +147,7 @@
     //functionality to add new order input fields
     newOrderBtn.addEventListener("click", () => {
         const orderHtml = ` <div class="new__order__fields"><label><span>Product Name</span><select required class="product__name" oninput="getProductName(this)"><option disabled="disabled" selected>Product name</option>{% for product in allProducts %}<option value="{{product.name}}">{{product.name}}</option>{% endfor %}</select></label><label><span>Unit</span><input type="text" name="Product Unit" class="product__unit" required placeholder=" product unit" readonly="readonly">
-            </label><label><span>Quantity</span><input type="number" name="Product Quantity" class="product__quantity" required placeholder="total quantity" maxlength="10" oninput="calcTotalPrice(this)"></label><label><span>Total Price</span><input type="number" name="Product Price" class="product__total__price" readonly="readonly" value="0"></label><button type="button" class="new__order__remove__btn btn">Remove</button></div>`;
+        </label><label><span>Quantity</span><input type="number" name="Product Quantity" class="product__quantity" required placeholder="total quantity" maxlength="10" oninput="calcTotalPrice(this)"></label><label><span>Total (Rs.)</span><input type="number" name="Product Price" class="product__total__price" readonly="readonly" value="0"></label><button type="button" class="new__order__remove__btn btn">Remove</button></div>`;
         newOrdersContainer.insertAdjacentHTML("afterbegin", orderHtml);
     });
 </script>

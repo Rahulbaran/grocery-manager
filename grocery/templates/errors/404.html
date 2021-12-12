@@ -1,0 +1,19 @@
+{% extends 'layout.html' %}
+{% block stylesheet %}
+<link rel="stylesheet" href="{{url_for('static',filename='css/404.css')}}">
+{% endblock %}
+{% block body %}
+<main class="main--404--container">
+
+    <img src="{{url_for('static',filename='site-images/404.svg')}}" alt="404 SVG Image">
+
+    <h1>Page Not Found</h1>
+
+    <p>The page you are looking for is under construction 😶</p>
+
+    <!-- <a href="{{url_for('main.home')}}" title='Go To Homepage' class="home__page__link">
+        <i class="fas fa-arrow-circle-left"></i>
+        <span>Home</span>
+    </a> -->
+</main>
+{% endblock %}

@@ -1,15 +1,16 @@
 import os, secrets
 from PIL import Image
 from threading import Thread
+from flask import current_app
 from flask_mail import Message
 from flask_login import current_user
-from grocery import mail, app
+from grocery import mail
 
 
 
 #Function to send the mail asynchronously
 def send_mail_async(app,msg):
-    with app.app_context():
+    with current_app.app_context():
         mail.send(msg) 
 
 
@@ -30,7 +31,7 @@ def send_reset_email(user):
         If you did not make this request then simply ignore this and no changes will be made in your account.
     </p>
     '''
-    Thread(target=send_mail_async, args=(app,msg)).start()
+    Thread(target=send_mail_async, args=(current_app,msg)).start()
     # mail.send(msg)
 
 
@@ -40,7 +41,7 @@ def uploadFunc (pic):
     random_hex = secrets.token_hex(8)
     _,ext = os.path.splitext(pic.filename)
     mod_pic = random_hex + ext
-    path = os.path.join(app.root_path,'static','user-images',mod_pic)
+    path = os.path.join(current_app.root_path,'static','user-images',mod_pic)
 
     size = (720,720)
     img = Image.open(pic)
@@ -48,6 +49,6 @@ def uploadFunc (pic):
     img.save(path)
 
     if current_user.avatar != 'default.png':
-        os.remove(os.path.join(app.root_path,'static','user-images',current_user.avatar))
+        os.remove(os.path.join(current_app.root_path,'static','user-images',current_user.avatar))
 
     return mod_pic

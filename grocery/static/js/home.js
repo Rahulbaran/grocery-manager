@@ -72,3 +72,28 @@ const loadOrders = entries => {
 //Intersection Observer to observer intersection of spinner with viewport
 const observer = new IntersectionObserver(loadOrders);
 if (loadingSpinner) observer.observe(loadingSpinner);
+
+/* ******************************
+ * Changing text content of orders and products page links when device size in less than 480px
+ ****************************** */
+const productsPageLink = document.querySelector(".manage__products__link");
+const ordersPageLink = document.querySelector(".new__order__link");
+
+const mediaQuery = window.matchMedia("screen and (max-width:480px)");
+
+mediaQuery.addListener(e => {
+    if (e.matches) {
+        productsPageLink.textContent = "Products";
+        ordersPageLink.textContent = "Orders";
+    } else {
+        productsPageLink.textContent = "Manage Products";
+        ordersPageLink.textContent = "Manage Orders";
+    }
+});
+
+window.onload = e => {
+    if (e.currentTarget.innerWidth <= 480) {
+        productsPageLink.textContent = "Products";
+        ordersPageLink.textContent = "Orders";
+    }
+};

@@ -1,7 +1,9 @@
 from datetime import datetime
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
+from flask import current_app
+
 from flask_admin.contrib.sqla import ModelView
-from grocery import db, login_manager, app, admin
+from grocery import db, login_manager, admin
 
 
 
@@ -27,13 +29,13 @@ class User(db.Model):
 
     # Method to generate reset token
     def generate_token(self,expire_sec=600):
-        s = Serializer(app.config['SECRET_KEY'], expire_sec)
+        s = Serializer(current_app.config['SECRET_KEY'], expire_sec)
         return s.dumps({'user_id' : self.id}).decode('utf-8')
 
     # Method to verify the token
     @staticmethod
     def verify_reset_token(token):
-        s = Serializer(app.config['SECRET_KEY'])
+        s = Serializer(current_app.config['SECRET_KEY'])
         try:
             user_id = s.loads(token)['user_id']
         except:
@@ -80,6 +82,8 @@ class Order(db.Model):
     order_date = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
     product_unit = db.Column(db.String(20), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+
+
 
 
 
