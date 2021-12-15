@@ -1,2 +1,2 @@
-
+.error--section{grid-gap:10px 0;display:grid;grid-template-columns:1fr;margin:10em auto 0;max-width:840px;text-align:center;width:95%}.error--section h1{color:var(--h1-color);font-family:var(--tertiary-font);font-size:10rem;margin-bottom:2.5rem}.error--section h2{color:var(--h1-color);font-family:var(--secondary-font);font-size:2rem;font-weight:500;margin-top:1rem;text-shadow:0 0 2px rgba(0,0,0,.25);text-transform:uppercase}.error--section p{color:#ff2b00}
 /*# sourceMappingURL=error.css.map */

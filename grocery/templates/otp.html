@@ -1,0 +1,27 @@
+{% extends 'layout.html' %}
+{% block stylesheet %}
+<link rel="stylesheet" href="{{url_for('static',filename='css/otp.css')}}">
+{% endblock %}
+{% block body %}
+<main class="otp--form--section">
+    <form method="post" autocomplete="off">
+        {{form.hidden_tag()}}
+
+        <legend>OTP Form</legend>
+
+        <div class="form__group">
+            {{form.otp.label}}
+            {% if form.otp.errors %}
+            {{form.otp(class="error__field")}}
+            {% for error in form.otp.errors %}
+            <span class="field__error__msg">{{error}}</span>
+            {% endfor %}
+            {% else %} 
+            {{form.otp(placeholder='enter 6 digits otp received')}}
+            {% endif %}
+        </div>
+
+        <div class="form__submit__group">{{form.submit(class="btn")}}</div>
+    </form>
+</main>
+{% endblock %}

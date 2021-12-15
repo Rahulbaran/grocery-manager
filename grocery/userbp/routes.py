@@ -1,11 +1,11 @@
-import os
+import os, random
 from flask import Blueprint, render_template, url_for, request, redirect, flash, session
 from flask_login import current_user, login_required, login_user, logout_user
 from grocery import db, bcrypt
 from grocery.models import User
-from grocery.userbp.form import RegistrationForm, AdminLoginForm, LoginForm, PasswordResetForm,\
+from grocery.userbp.form import RegistrationForm, AdminLoginForm, LoginForm, PasswordResetForm, OTPForm,\
                               PasswordResetRequestForm, UpdateAccountForm, UpdateGeneralDetailsForm
-from grocery.userbp.utils import send_reset_email, uploadFunc
+from grocery.userbp.utils import send_reset_email, uploadFunc, sendOtp
 
 
 
@@ -110,8 +110,9 @@ def passwordReset(token):
 @login_required
 def logout():
     logout_user()
-    flash('You have logged out from the site', 'info')
+    flash('You have logged out from your account', 'info')
     return redirect(url_for('main.home'))
+
 
 
 
@@ -122,11 +123,14 @@ def admin_login():
     form = AdminLoginForm()
     if form.validate_on_submit():
         admin_username,admin_password = form.username.data, form.password.data
-        if admin_username == os.environ.get('ADMIN_USERNAME') and \
-        admin_password == os.environ.get("ADMIN_PASSWORD"):
-            session["admin_logged_in"] = True
-            flash('Welcome admin, you have logged in', 'info')
-            return redirect('/admin')
+        if admin_username == os.environ.get('ADMIN_USERNAME') and admin_password == os.environ.get("ADMIN_PASSWORD"):
+            otpNumber = random.randint(100000,999999)
+            sid = sendOtp(otpNumber)
+            if sid:
+                return redirect(url_for('userbp.otp'))
+            else:
+                flash('OTP Couldn\'t get delivered','info')
+                return redirect(url_for('main.home'))
         else :
             flash('Either username or password is wrong', 'error')
     return render_template('admin_login.html', title='Admin Login Page', form = form)
@@ -135,14 +139,34 @@ def admin_login():
 
 
 
+
+@userbp.route('/otp', methods=["GET", "POST"])
+def otp():
+    if session.get('otp'):
+        form = OTPForm()
+        if form.validate_on_submit() and session['otp'] == int(form.otp.data):
+            session['admin_logged_in'] = True
+            flash('Welcome admin you have logged in', 'info')
+            return redirect('/admin')
+        return render_template('otp.html', title='Admin Login OTP', form=form)
+    else:
+        flash('Admin should login first to access the otp page', 'error')
+        return redirect(url_for('userbp.admin_login'))
+
+
+
+
+
+
 @userbp.route('/admin_logout')
 def admin_logout():
     if "admin_logged_in" in session:
-        session.clear()
+        session.pop('admin_logged_in',default=None)
+        session.pop('otp',default=None)
         flash('You have logged out from the admin page','info')
         return redirect(url_for('main.home'))
     else :
-        flash('Please login before getting logged out', 'warning')
+        flash('Please login before getting logged out', 'error')
         return redirect(url_for('userbp.admin_login'))
 
 

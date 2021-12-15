@@ -64,6 +64,16 @@ class AdminLoginForm(FlaskForm):
 
 
 
+
+# OTP Form
+class OTPForm(FlaskForm):
+    otp = StringField('Enter OTP', validators=[Length(min=6, max=6, message='OTP must be 6 digits long'), InputRequired()])
+    submit = SubmitField('Verify OTP')
+
+
+
+
+
 # Form to make request for password Update
 class PasswordResetRequestForm(FlaskForm):
     email = EmailField('Email Address', validators=[InputRequired(), Length(min=10, max=200, message='email must be at max 200 characters long')])

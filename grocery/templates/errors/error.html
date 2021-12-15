@@ -1,0 +1,12 @@
+{% extends 'layout.html' %}
+{% block stylesheet %}
+<link rel="stylesheet" href="{{url_for('static',filename='css/error.css')}}">
+{% endblock %}
+
+{% block body %}
+<section class="error--section">
+    <h1>{{code}}</h1>
+    <h2>{{error_heading}}</h2>
+    <p>{{message}}</p>
+</section>
+{% endblock %}

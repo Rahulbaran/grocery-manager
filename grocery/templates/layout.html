@@ -6,34 +6,57 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="Rahul kumar">
     <meta name="contact" content="rahulkumar109422@gmail.com">
+    <meta name="keywords" content="Grocery Manager,Manage Grocery,Grocery,Management,Grocery Management,Business Management,Manage Business">
+    <meta name="description" content="Grocery Manager is a grocery management application where you can store your shop orders, products available in your shops etc. The application has been by developed by SPARSM Team.">
     <meta name="theme-color" media="(prefers-color-scheme : light)" content="hsl(250,100%,80%)">
     <meta name="theme-color" media="(prefers-color-scheme : dark)" content="hsl(260,100%,93%)">
 
     <meta name="robots" content="follow,index">
 
+
+    <!---------------- Open Graph meta tags for facebook & twitter cards ----------------->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="">
+    <meta property="og:title" content="Grocery Manager">
+    <meta property="og:description" content="Grocery Manager is a grocery management application where you can store your shop orders, products available in your shops etc. The application has been by developed by SPARSM Team.">
+    <meta property="og:image" content="{{url_for('static',filename='site-images/card-image.png')}}">
+
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="">
+    <meta property="twitter:title" content="Grocery Manager">
+    <meta property="twitter:description" content="Grocery Manager is a grocery management application where you can store your shop orders, products available in your shops etc. The application has been by developed by SPARSM Team.">
+    <meta property="twitter:image" content="{{url_for('static',filename='site-images/card-image.png')}}">
+
+
     <!-------------------- Application current page title -------------------->
     <title>{{title}} | Grocery Manager</title>
 
+
     <!------------------------ Favicon of application ------------------------->
     <link rel="shortcut icon" href="{{url_for('static',filename='site-images/icons/grocery-64.png')}}" type="image/png">
+
 
     <!--------------------------- Google fonts -------------------------->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&family=Noto+Sans&family=Rubik:wght@300;400;500&display=swap" rel="stylesheet">
 
+
     <!---------------------- fontawesome icons stylesheet --------------------->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" integrity="sha512-BnbUDfEUfV0Slx6TunuB042k9tuKe3xrD6q4mg5Ed72LTgzDIcLPxg6yI2gcMFRyomt+yJJxE+zJwNmxki6/RA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
 
     <!--------------------------- Custom stylesheets -------------------------->
     <link rel="stylesheet" href="{{url_for('static', filename='css/layout.css')}}">
 
-    <!----------------------- manifest.json file ------------------------->
-    <link rel="manifest" href="{{url_for('static',filename='manifest.json')}}">
 
     <!--------------- Jinja block for custom css in child templates ------------------>
     {% block stylesheet %}
     {% endblock %}
+
+    <!----------------------- manifest.json file ------------------------->
+    <link rel="manifest" href="{{url_for('static',filename='manifest.json')}}">
+
 
 </head>
 <body>
