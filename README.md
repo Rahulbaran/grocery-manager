@@ -74,11 +74,7 @@ If Some packages did not install then try to install them individually (In my ca
 Create a `.env` file in **root** directory (folder) and put the following inputs (in capital) in the file which will be used in **app configuration**.
 
 | INPUT NAME |
-<<<<<<< HEAD
 |-------------|
-=======
-| --------------- |
->>>>>>> 672e6c4aabe869f1669fbdb99b1a6bbe3ffdf056
 | SECRET_KEY |
 | RECAPTCHA_PRIVATE_KEY (You will have to register your application in Google Recaptcha website to get private & public keys)|
 | RECAPTCHA_PUBLIC_KEY |
