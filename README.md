@@ -56,7 +56,7 @@ $ . virtual/scripts/activate
 ##### macOS/Linux
 
 ```bash
-$ virtual/bin/activate
+$ source virtual/bin/activate
 ```
 
 ### Step-4 :-
