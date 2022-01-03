@@ -58,7 +58,7 @@ $ . virtual/scripts/activate
 ##### macOS/Linux
 
 ```bash
-$ virtual/bin/activate
+$ source virtual/bin/activate
 ```
 
 ### Step-4 :-
@@ -75,6 +75,7 @@ If Some packages did not install then try to install them individually (In my ca
 
 Create a `.env` file in **root** directory (folder) and put the following inputs (in capital) in the file which will be used in **app configuration**.
 
+<<<<<<< HEAD
 | INPUT NAME                                                                                                                  |
 | --------------------------------------------------------------------------------------------------------------------------- |
 | SECRET_KEY                                                                                                                  |
@@ -88,6 +89,21 @@ Create a `.env` file in **root** directory (folder) and put the following inputs
 | AUTH_TOKEN                                                                                                                  |
 | TWILIO_PHONE_NUMBER                                                                                                         |
 | PERSONAL_MOBILE_NUMBER (Provide any mobile number you wish to get the OTP for 2FA)                                          |
+=======
+| INPUT NAME |
+|-------------|
+| SECRET_KEY |
+| RECAPTCHA_PRIVATE_KEY (You will have to register your application in Google Recaptcha website to get private & public keys)|
+| RECAPTCHA_PUBLIC_KEY |
+| GMAIL_USERNAME |
+| GMAIL_PASSWORD (You will have to generate it using google account) |
+| ADMIN_USERNAME (Use any username and password you wish for admin page) |
+| ADMIN_PASSWORD |
+| ACCOUNT_SID (To use the admin page you will have to go through 2FA & I am using Twilio for OTP) |
+| AUTH_TOKEN |
+| TWILIO_PHONE_NUMBER |
+| PERSONAL_MOBILE_NUMBER (Provide any mobile number you wish to get the OTP for 2FA) |
+>>>>>>> 61496de52ff68c1f39c3c36501a3764acebbdad9
 
 ### Step-6 :-
 
